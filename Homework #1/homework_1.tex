@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 1}
+
+\author{Chris Hayduk}
+\date{September 2, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+\end{problem}
+
+Let $A_1 = $ ``Donna drew a fair coin'', $A_2 = $ ``Donna drew the two-headed coin'' and let $B = $ ``Donna flipped 6 heads in a row''.\\
+
+Note that
+
+\begin{align*}
+P(A_1) &= \frac{64}{65}\\
+P(B|A_1) &= \frac{1/2^6}{64/65} = \frac{65}{4096} \approx 0.01587
+\end{align*}
+
+and
+
+\begin{align*}
+P(A_2) &= \frac{1}{65}\\
+P(B|A_2) &= 1
+\end{align*}
+
+Hence,
+\begin{align*}
+\sum P(A_j) P(B | A_j) &= \frac{64}{65} \cdot \frac{65}{4096} + \frac{1}{65} \cdot 1\\
+&= \frac{129}{4160} \approx 0.031
+\end{align*}
+
+Thus, we have,
+\begin{align*}
+P(A_2 | B) &= \frac{P(A_2)P(B|A_2)}{\sum P(A_j) P(B | A_j)}\\
+&= \frac{1/65}{129/4160}\\
+&= \frac{64}{129} \approx 0.4961
+\end{align*}
+
+So if Donna flips 6 heads in a row, there is about a 49.61\% chance that she chose the two-headed coin.
+
+\newpage
+
+\begin{problem}{2}
+\end{problem}
+
+We have that $X_1, X_2$ are two independent uniform (0, 1) random variables on the same probability space. In addition, we have that $Y = \min \{X_1, X_2\}$.\\
+
+In order to find the CDF of $Y$, we must find $P(Y \leq y)$. Note that,
+
+\begin{align*}
+P(Y \leq y) = P(\min \{X_1, X_2\} \leq y)
+\end{align*}
+
+In addition, note that,
+\begin{align*}
+P(Y \leq y) &= 1 - P(Y > y)\\
+&= 1 - P(\min \{X_1, X_2\} > y)
+\end{align*}
+
+Since we are taking a minimum, $\min \{X_1, X_2\} > y$ if and only if we have both $X_1 > y$ and $X_2 > y$. Since $X_1$ and $X_2$ are independent, we can separate this joint probability as follows:
+
+\begin{align*}
+P(Y \leq y) &= 1 - P(Y > y)\\
+&= 1 - P(\min \{X_1, X_2\} > y)\\
+&= 1 - P(X_1 > y) \cdot P(X_2 > y)\\
+&= 1 - P(X_1 > y)^2\\
+&= 1 - (1 - P(X_1 \leq y))^2
+\end{align*}
+
+We know from p. 258 in the text that for a uniform random variable $X$, we have $P(X \leq x) = (x - a)/(b - a)$. Thus, in our case, we have
+\begin{align*}
+1 - P(X_1 \leq y) &= 1 - (y - 0)/(1 - 0)\\
+&= 1 - x
+\end{align*}
+
+Hence,
+\begin{align*}
+P(Y \leq y) = 1 - (1 - y)^2
+\end{align*}
+
+and as a result, the CDF of Y is,
+\begin{align*}
+F_Y(y) = \begin{cases} 
+      0 & y \leq 0 \\
+      1 - (1 - y)^2 & 0 < y < 1 \\
+      1 & y \geq 1
+   \end{cases}
+\end{align*}
+
+\newpage
+
+\begin{problem}{3}
+\end{problem}
+
+
+\begin{problem}{4}
+\end{problem}
+
+\begin{enumerate}[(\Alph*)]
+
+\item
+
+\item
+
+\end{enumerate}
+
+\end{document}
