@@ -28,6 +28,8 @@
 \newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
 
 \begin{document}
 
@@ -126,7 +128,17 @@ F_Y(y) = \begin{cases}
 \begin{problem}{3}
 \end{problem}
 
+Let $X$ and $Y$ be independent, integer-valued random variables and fix $n \in \mathbb{Z}$. Then we have,
+\begin{align*}
+P(X + Y = n) &= \sum_{m \in \mathbb{Z}} P(X = m, Y = n - m)\\
+&= \sum_{m \in \mathbb{Z}} P(Y = n - m  \, | \, X = m) P(X = m)
+\end{align*}
 
+Since $X$ and $Y$ are independent, we have
+\begin{align*}
+P(X + Y = n) &= \sum_{m \in \mathbb{Z}} P(Y = n - m  \, | \, X = m) P(X = m)\\
+&= \sum_{m \in \mathbb{Z}} P(X = m) P(Y = n - m)
+\end{align*}
 \begin{problem}{4}
 \end{problem}
 
@@ -134,7 +146,58 @@ F_Y(y) = \begin{cases}
 
 \item
 
+We have
+
+\begin{align*}
+\E[YZ] &= \int_{0}^1 \sin(2\pi x) \cdot \cos(2\pi x) dx\\
+&= \int_{0}^1 \frac{1}{2} \sin(4\pi x) dx\\
+&= \frac{1}{2} \int_{0}^1 \sin(4\pi x) dx\\
+&= \frac{1}{2} \left[ - \frac{\cos(4\pi \cdot 1)}{4 \pi} - \left(- \frac{\cos(4\pi \cdot 0)}{4 \pi}\right)\right]\\
+&= \frac{1}{2} \left[ - \frac{\cos(4\pi)}{4 \pi} + \frac{\cos(0)}{4 \pi}\right]\\
+&= \frac{1}{2} \left[ - \frac{1}{4 \pi} + \frac{1}{4 \pi}\right]\\
+&= 0
+\end{align*}
+
+and
+
+\begin{align*}
+\E[Y] \cdot \E[Z] &= \int_0^1 \sin(2\pi x) dx \cdot \int_0^1 \cos(2\pi x) dx\\
+&= \left[-\frac{\cos(2\pi)}{2\pi} + \frac{\cos(0)}{2\pi}\right] \cdot \left[\frac{\sin(2\pi)}{2\pi} - \frac{\sin(0)}{2\pi}\right]\\
+&= \left[-\frac{1}{2\pi} + \frac{1}{2\pi}\right] \cdot \left[\frac{0}{2\pi} - \frac{0}{2\pi}\right]\\
+&= 0 \cdot 0 = 0
+\end{align*}
+
+Hence, $\E[YZ] = \E[Y] \cdot \E[Z]$ and, as a result, we have that $Y$ and $Z$ are uncorrelated.
+
+\newpage
 \item
+
+$Y$ and $Z$ are not independent variables. To show this, we need to find sets $A$ and $B$ such that
+
+\begin{align*}
+P(Y \in A, Z \in B) \neq P(Y \in A) \cdot P(Z \in B)
+\end{align*}
+
+Let $A = B = [0.9, 1]$.
+
+Then,
+
+\begin{align*}
+P(Y \in A, Z \in B) &= P(0.9 \leq Y \leq 1, 0.9 \leq Z \leq 1)\\
+&= \int_0.9^1 \sin(2\pi x) \cdot \cos(2\pi x) dx\\
+&= \frac{1}{2} \int_{0.9}^1 \sin(4\pi x) dx\\
+&= \frac{1}{2} \left[-\frac{\cos(4\pi)}{4\pi} - \frac{-\cos(4\pi \cdot 0.9}{4\pi}\right]\\
+&\approx -0.02749
+\end{align*}
+
+However,
+\begin{align*}
+P(Y \in A) \cdot P(Z \in B) &= P(0.9 \leq Y \leq 1) \cdot P(0.9 \leq Z \leq 1)\\
+&= \int_{0.9}^1 \sin(2\pi x) dx \cdot \int_{0.9}^1 \cos(2\pi x) dx\\
+&\approx -0.00284
+\end{align*}
+
+Hence, $P(Y \in A, Z \in B) \neq P(Y \in A) \cdot P(Z \in B)$ and $Y$ and $Z$ are not independent.
 
 \end{enumerate}
 
