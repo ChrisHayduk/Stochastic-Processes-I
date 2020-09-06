@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.19)  2 SEP 2020 23:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.19)  5 SEP 2020 22:25
 entering extended mode
-**./homework_1.tex
-(homework_1.tex
+**./homework_2.tex
+(homework_2.tex
 LaTeX2e <2018-12-01>
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -246,22 +246,30 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 sty"
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup6
-) (homework_1.aux)
-\openout1 = `homework_1.aux'.
+)
+("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/generic/genmisc\kborderm
+atrix.sty"
+Package: kbordermatrix 2011/09/21 Bordered matrix with brackets
+\kbcolsep=\skip54
+\kbrowsep=\skip55
+\br@kwd=\skip56
+\k@bordht=\skip57
+) (homework_2.aux)
+\openout1 = `homework_2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 38.
 
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -393,99 +401,101 @@ G,.JBIG2,.JB2,.eps]
 \Gin@req@height=\dimen132
 \Gin@req@width=\dimen133
 )
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 41.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 45.
 
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 41.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 45.
 
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 41.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 45.
 
 
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 41.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 45.
 
 
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 41.
+(Font)              <14.4> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 41.
+(Font)              <10> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 41.
-LaTeX Font Info:    Try loading font information for U+msa on input line 41.
+(Font)              <7> on input line 45.
+LaTeX Font Info:    Try loading font information for U+msa on input line 45.
 
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 41.
+LaTeX Font Info:    Try loading font information for U+msb on input line 45.
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 41.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 45.
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 46.
+(Font)              <12> on input line 51.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 46.
+(Font)              <8> on input line 51.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 46.
+(Font)              <6> on input line 51.
 
-Underfull \hbox (badness 10000) in paragraph at lines 46--47
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
 
  []
 
 [1
 
 {C:/Users/chris/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 82--83
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
-[2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-
- []
-
-[4] (homework_1.aux) ) 
+[2] [3] [4] [5] (homework_2.aux) ) 
 Here is how much of TeX's memory you used:
- 4137 strings out of 492895
- 61394 string characters out of 3123735
- 137178 words of memory out of 3000000
- 7954 multiletter control sequences out of 15000+200000
+ 4156 strings out of 492895
+ 61823 string characters out of 3123735
+ 137538 words of memory out of 3000000
+ 7969 multiletter control sequences out of 15000+200000
  42012 words of font info for 57 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,14n,32p,300b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/e
-nc/dvips/lm/lm-mathsy.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/enc/dvips/lm/lm-mathit.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9
-/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX
- 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX
- 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Users/chris/AppData/Local/Programs/MiKTeX
- 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Users/chris/AppData/Local/Programs/Mi
-KTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Users/chris/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/chris/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/chris/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/chris/AppData/Loc
-al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/chris/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/chris/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/chris/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:/Users/chris
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.p
-fb>
-Output written on homework_1.pdf (4 pages, 142271 bytes).
+ 55i,14n,32p,300b,203s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/chris/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/chris/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/chris/AppData/Local/Program
+s/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/chris/AppData/Local/Program
+s/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/chris/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Users/chris/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Users/chris/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Users/chris/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/chris/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/chris/Ap
+pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/chris
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/ch
+ris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/
+chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
+Output written on homework_2.pdf (5 pages, 126716 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
