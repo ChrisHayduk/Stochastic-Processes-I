@@ -1,0 +1,285 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 2}
+
+\author{Chris Hayduk}
+\date{September 23, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+Durrett, Exercise 1.8
+\end{problem}
+
+\begin{enumerate}[label=(\alph*), start=4]
+\item The irreducible closed sets are: $\{1, 4\}, \{2, 5\}$\\
+
+Recurrent states: From examining the transition probabilities, we have that $\{1, 4\}, \{2, 5\}$ are the irreducible closed sets. Hence, by Theorem 1.7, $\{1, 2, 4, 5\}$ are all recurrent. By Theorem 1.8, these are the \textbf{only} recurrent states.\\
+
+Transient states: Note that the state space $S$ is finite. Hence, by Theorem 1.8, we have that the set of transient states and irreducible closed sets (ie. recurrent states) partition $S$. Moreover, we have that these sets are disjoint. Hence, the transient states are given by
+\begin{align*}
+T &= S \setminus (\{1, 4\} \cup \{2, 5\})\\
+&= \{3, 6\}
+\end{align*}
+
+\item The irreducible closed sets are: $\{1\}, \{2, 4\}$\\
+
+Recurrent states: From examining the transition probabilities, we have that $\{1\}, \{2, 4\}$ are the irreducible closed sets. Hence, by Theorem 1.7, $1, 2, 4$ are all recurrent. By Theorem 1.8, these are the \textbf{only} recurrent states.\\
+
+Transient states: Note that the state space $S$ is finite. Hence, by Theorem 1.8, we have that the set of transient states and irreducible closed sets (ie. recurrent states) partition $S$. Moreover, we have that these sets are disjoint. Hence, the transient states are given by
+\begin{align*}
+T &= S \setminus (\{1\} \cup \{2, 4\})\\
+&= \{3, 5\}
+\end{align*}
+\end{enumerate}
+
+\newpage
+\begin{problem}{2}
+Durrett, Exercise 1.40
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+\item The transition probability matrix is given by:
+\begin{align*}
+\kbordermatrix{
+    & 1 & 2 & 3 & 4 \\
+    1 & 1/3 & 2/3 & 0 & 0\\
+    2 & 1/3 & 0 & 2/3 & 0\\
+    3 & 0 & 1/3 & 0 & 2/3\\
+    4 & 0 & 0 & 1/3 & 2/3
+  }
+\end{align*}
+
+\item Note that we are finding the stationary distribution(s) for the chain.\\
+
+Hence, we need to find $\pi$ such that
+\begin{align*}
+\begin{pmatrix}
+\pi_1 & \pi_2 & \pi_3 & \pi_4
+\end{pmatrix} \begin{pmatrix}
+    1/3 & 2/3 & 0 & 0\\
+    1/3 & 0 & 2/3 & 0\\
+    0 & 1/3 & 0 & 2/3\\
+    0 & 0 & 1/3 & 2/3
+\end{pmatrix}
+  = \begin{pmatrix}
+\pi_1 & \pi_2 & \pi_3 & \pi_4
+\end{pmatrix} 
+\end{align*}
+
+So we need to solve:
+\begin{align*}
+\pi_1/3 + \pi_2/3 &= \pi_1\\
+2\pi_1/3 + \pi_3/3 &= \pi_2\\
+2\pi_2/3 + \pi_4/3 &= \pi_3\\
+2\pi_3/3 + 2\pi_4/3 &= \pi_4
+\end{align*}
+
+Which yields,
+\begin{align*}
+\begin{pmatrix}
+\pi_1 & 2\pi_1 & 4\pi_1 & 8\pi_1
+\end{pmatrix} 
+\end{align*}
+
+We must have that these probabilities add to $1$, so 
+\begin{align*}
+&\pi_1 + 2\pi_1 + 4\pi_1 + 8\pi_1 = 1\\
+&\implies \pi_1 = 1/15
+\end{align*}
+
+Thus, we get
+\begin{align*}
+\pi = \begin{pmatrix}
+1/15 & 2/15 & 4/15 & 8/15
+\end{pmatrix}
+\end{align*}
+
+Now let's check that this is indeed the stationary distribution:
+\begin{align*}
+\begin{pmatrix}
+1/15 & 2/15 & 4/15 & 8/15
+\end{pmatrix} \begin{pmatrix}
+    1/3 & 2/3 & 0 & 0\\
+    1/3 & 0 & 2/3 & 0\\
+    0 & 1/3 & 0 & 2/3\\
+    0 & 0 & 1/3 & 2/3
+\end{pmatrix} &= \begin{pmatrix}
+3/45 & 6/45 & 12/45 & 24/45
+\end{pmatrix}\\
+&= \begin{pmatrix}
+1/15 & 2/15 & 4/15 & 8/15
+\end{pmatrix}
+\end{align*}
+
+Since we have,
+\begin{align*}
+\pi \begin{pmatrix}
+    1/3 & 2/3 & 0 & 0\\
+    1/3 & 0 & 2/3 & 0\\
+    0 & 1/3 & 0 & 2/3\\
+    0 & 0 & 1/3 & 2/3
+\end{pmatrix} = \pi
+\end{align*}
+
+we know that $\pi = \begin{pmatrix}
+1/15 & 2/15 & 4/15 & 8/15
+\end{pmatrix}$ is indeed the stationary distribution.
+\end{enumerate}
+
+\begin{problem}{3}
+Durrett, Exercise 1.59
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+\item Let $X_n = i$. Our possible outcomes are:
+\begin{enumerate}
+\item White ball from left urn and white ball from right urn:
+\begin{align*}
+\frac{m-i}{m} \cdot \frac{m-b+i}{m} &= \frac{(m-i)(m-b+i)}{m^2}\\
+&= \frac{m^2 - mb + mi - mi + bi - i^2}{m^2}\\
+&= \frac{m^2 - mb + bi - i^2}{m^2}
+\end{align*}
+
+Hence $X_{n+1} = i = X_n$
+
+\item White ball from left urn and black ball from right urn:
+\begin{align*}
+\frac{m-i}{m} \cdot \frac{b-i}{m} &= \frac{(m-i)(b-i)}{m^2}\\
+&= \frac{mb - mi - bi + i^2}{m^2}
+\end{align*}
+
+Hence $X_{n+1} = i + 1 = X_n + 1$
+
+
+\item Black ball from left urn and black ball from right urn:
+\begin{align*}
+\frac{i}{m} \cdot \frac{b-i}{m} &= \frac{bi - i^2}{m^2}
+\end{align*}
+
+Hence $X_{n+1} = i = X_n$
+
+\item Black ball from left urn and white ball from right urn:
+\begin{align*}
+\frac{i}{m} \cdot \frac{m-b+i}{m} &= \frac{mi - bi + i^2}{m^2}
+\end{align*}
+
+Hence $X_{n+1} = i - 1 = X_n - 1$
+\end{enumerate}
+
+So the probability that $X_{n+1} = X_n$ is given by
+\begin{align*}
+\frac{bi - i^2}{m^2} + \frac{m^2 - mb + bi - i^2}{m^2} &= \frac{m^2 - mb + 2bi - 2i^2}{m^2}
+\end{align*}
+
+So our transition probability matrix is:
+\begin{align*}
+p = \frac{1}{m^2} \begin{pmatrix}
+0 & m^2 & 0 & 0 & \cdots & 0 & 0\\
+m - b + 1 & m^2 - mb & mb - m - b + 1 & 0 & \cdots & 0 & 0\\
+\vdots & \vdots & & & & & \vdots\\
+0 & 0 & & & & m^2 & 0
+\end{pmatrix}
+\end{align*}
+
+\item Let
+\begin{align*}
+\pi(i) = {b \choose i} {2m - b \choose m - i} \bigg/ {2m \choose m}
+\end{align*}
+
+So,
+\begin{align*}
+\pi &= \begin{pmatrix}
+{2m - b \choose m} \bigg/ {2m \choose m} & b {2m - b \choose m - 1} \bigg/ {2m \choose m} & {b \choose 2} {2m - b \choose m - 2} \bigg/ {2m \choose m} & \cdots & (2mb - b^2) \bigg/ {2m \choose m} & {2m - b \choose m - b} \bigg/ {2m \choose m}
+\end{pmatrix}
+\end{align*}
+
+\item We are choosing $i$ black balls (which is the number of black balls in the left urn) from the $b$ total black balls. We then choose $m - i$ white balls (the number of white balls in the left urn) from the $2m - b$ total white balls. We then choose $m$ balls from the $2m$ total balls and divide by this number.\\
+
+Essentially $\pi(i)$ is giving us the ratio of the number of combinations with $i$ black balls and $m - i$ white balls in the left urn to the total number of possible combinations of balls in the left urn. Another way of showing this is:
+\begin{align*}
+\pi(i) = \frac{\text{\# of combinations of balls in left urn with i black balls and m - i white balls}}{\text{total \# of possible combinations of balls in left urn}}
+\end{align*}
+
+when the markov chain is in state $i$.
+
+\end{enumerate}
+\newpage
+\begin{problem}{4}
+\end{problem}
+
+Suppose $\pi$ satisfies the detailed balance condition. That is,
+\begin{align*}
+\pi(x) p(x, y) = \pi(y) p(y, x)
+\end{align*}
+
+Now consider $p^2$. Note that, from Theorem 1.1, we have
+\begin{align*}
+p^2(x, y) &= \sum_k p(x, k) p(k, y)
+\end{align*}
+
+and
+\begin{align*}
+p^2(y, x) &= \sum_k p(y, k) p(k, x)
+\end{align*}
+
+Now multiplying by $\pi(x)$ in the first equation yields
+\begin{align*}
+\pi(x) p^2(x, y) &= \pi(x) \sum_k p(x, k) p(k, y)\\
+&= \sum_k \pi(x) \left[p(x, k) p(k, y)\right]\\
+&= \sum_k \left[\pi(x) p(x, k)\right] p(k,y)\\
+&= \sum_k \pi(k) p(k, x) p(k, y)\\
+&= \sum_k p(k, x) \left[\pi(k) p(k, y)\right]\\
+&= \sum_k p(k, x) \pi(y) p(y, k)\\
+&= \sum_k \pi(y) \left[ p(y, k) p(k, x) \right]\\
+&= \pi(y) \sum_k p(y, k) p(k, x)\\
+&= \pi(y) p^2(y, x)
+\end{align*}
+
+Hence, we have $\pi(x) p^2(x, y) = \pi(y) p^2(y, x)$ as required.
+\end{document}
