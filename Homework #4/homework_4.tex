@@ -1,0 +1,330 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 4}
+
+\author{Chris Hayduk}
+\date{September 30, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+Durrett, Exercise 1.38
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Let us look at each case. If $X_n = 0$, then she cannot bring any umbrellas with her and all three are at the next location. So $X_{n+1} = 3$.\\
+
+If $X_n = 1$, she brings the umbrella with her with probability 0.2. So with probability 0.2, $X_{n+1} = 3$ and with probability 0.8, $X_{n+1} = 2$.\\
+
+If $X_n = 2$, she brings the umbrella with her with probability 0.2. So with probability 0.2, $X_{n+1} = 2$ and with probability 0.8, $X_{n+1} = 1$.\\
+
+If $X_n = 3$, she brings the umbrella with her with probability 0.2. So with probability 0.2, $X_{n+1} = 1$ and with probability 0.8, $X_{n+1} = 0$.\\
+
+This yields the following transition probability matrix:
+\begin{align*}
+p = \kbordermatrix{
+    & 0 & 1 & 2 & 3 \\
+    0 & 0 & 0 & 0 & 1\\
+    1 & 0 & 0 & 0.8 & 0.2\\
+    2 & 0 & 0.8 & 0.2 & 0\\
+    3 & 0.8 & 0.2 & 0 & 0\\
+  }
+\end{align*}
+
+\item Note that she gets wet when $X_n = 0$ and it rains outside.\\
+
+We have that the above Markov chain is finite since there are only $4$ possible states. Moreover, $p$ is closed as well because there is no way out of the chain. Thus, by Theorem 1.7, we have that all states $p$ are recurrent. In addition, $p$ is irreducible because every state communicates with every other state in the chain. Hence, we can apply Theorem 1.20 which states,
+\begin{align*}
+\frac{N_n(0)}{n} \to \frac{1}{E_0T_0}
+\end{align*}
+
+where $\frac{N_n(0)}{n}$ is the fraction of visits to $0$ up to time $n$.\\
+
+By Theorem 1.21, we also have,
+\begin{align*}
+\pi(0) = \frac{1}{E_0T_0}
+\end{align*}
+
+So we just need to find the stationary distribution and its entry for state $0$ in order to find the limiting fraction of visits to state $0$.\\
+
+Let's compute the stationary distribution $\pi$,
+\begin{align*}
+&\pi p = \pi\\
+\iff &\begin{pmatrix}
+\pi_0 & \pi_1 & \pi_2 & \pi_3
+\end{pmatrix} \begin{pmatrix}
+    0 & 0 & 0 & 1\\
+    0 & 0 & 0.8 & 0.2\\
+    0 & 0.8 & 0.2 & 0\\
+    0.8 & 0.2 & 0 & 0\\
+\end{pmatrix}
+  = \begin{pmatrix}
+\pi_0 & \pi_1 & \pi_2 & \pi_3
+\end{pmatrix}
+\end{align*}
+
+So we need to solve:
+\begin{align*}
+0.8\pi_3 &= \pi_0\\
+0.8\pi_2 + 0.2\pi_3 &= \pi_1\\
+0.8\pi_1 + 0.2\pi_2 &= \pi_2\\
+\pi_0 + 0.2\pi_1 &= \pi_3
+\end{align*}
+
+Which yields,
+\begin{align*}
+\pi_0 &= \pi_0\\
+\pi_1 &= 5\pi_0/4\\
+\pi_2 &= 5\pi_0/4\\
+\pi_3 &= 5\pi_0/4
+\end{align*}
+
+With the additional constraint that they must sum to $1$, we get,
+\begin{align*}
+\pi_0 &= \frac{4}{19} \approx 0.2105
+\end{align*}
+
+Note that this is the fraction of times where she is left with $0$ umbrellas. With probability $0.2 = 1/5$, it will rain when she has no umbrellas left. So the limiting fraction of times she gets wet is,
+\begin{align*}
+\frac{4}{19} \cdot \frac{1}{5} &= \frac{4}{95}\\
+&\approx 0.042105
+\end{align*}
+\end{enumerate}
+
+\begin{problem}{2}
+Durrett, Exercise 1.62
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Let $u$ be in the set of vertices $V$ of the chessboard. Then we have that the degree of $u$ is $d(u) = \sum_{v \in V} A(u, v)$, where $A(u, v) = 1$ if there is an edge connecting $u$ to $v$ and $0$ otherwise. The degrees for each vertex are given by the following matrix,
+\begin{align*}
+\begin{array}{cccc|cccc}
+  3 & 5 & 5 & 5 & 5 & 5 & 5 & 3\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  \hline
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  3 & 5 & 5 & 5 & 5 & 5 & 5 & 3
+\end{array}
+\end{align*}
+
+We know that $A(u, v) = A(v, u)$ because if a king can move to any spot on the board, then it can move back to the previous spot. In addition, we have that,
+\begin{align*}
+p(u, v) = \frac{A(u,v)}{d(u)}
+\end{align*}
+
+defines a transition probability. So if $\pi(u) = cd(u)$ for some constant $c > 0$, we have that,
+\begin{align*}
+\pi(u)p(u, v) &= cd(u) \cdot \frac{A(u,v)}{d(u)}\\
+&= cA(u,v)\\
+&= cA(v, u)\\
+&= (cA(v,u)) \cdot \frac{d(v)}{d(v)}\\
+&= cd(v) \cdot \frac{A(v, u)}{d(v)}\\
+&= \pi(v) p(v, u)
+\end{align*}
+
+If we take $c = 1/\sum_{u \in V} d(u)$, then clearly $\sum_{u \in V} cd(u) = 1$ and so $cd$ defines a stationary probability distribution.\\
+
+The sum of the degrees is $4 \cdot 3 + 5 \cdot 24 + 8 \cdot 36 = 420$, so $c = 1/420$ and the stationary distribution of the chain is,
+\begin{align*}
+\pi = 1/420 \cdot \begin{array}{cccc|cccc}
+  3 & 5 & 5 & 5 & 5 & 5 & 5 & 3\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  \hline
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  5 & 8 & 8 & 8 & 8 & 8 & 8 & 5\\
+  3 & 5 & 5 & 5 & 5 & 5 & 5 & 3
+\end{array}
+\end{align*}
+
+\item Now we need to find the expected number of moves to return to corner $(1,1)$ when we start there.\\
+
+We have that there is a stationary distribution $\pi$ for this Markov chain.\\
+
+In addition, we will show that $p$ is irreducible. Imagine the king is on vertex $u$ and we want to move to vertex $v$. If $u$ is in the same row as $v$, we can move the piece horizontally until it reaches $v$. If $u$ is in the same column as $v$, we can move the piece vertically until it reaches $v$. If neither are true, we can move the piece horizontally until it is in the same column as $v$ and then move it vertically until it reaches $v$. If $u = v$, then move vertically and make the opposite move to get back to $u$.\\
+
+Hence, we have shown that for any two vertices $u, v \in V$, $u$ communicates with $v$. As a result, $p$ is irreducible. Then we can apply Theorem 1.21, which states,
+\begin{align*}
+\pi(y) = 1/E_yT_y
+\end{align*}
+
+Note that the value we are looking for is $E_{(1,1)}T_{(1,1)}$, so we take,
+\begin{align*}
+E_{(1,1)}T_{(1,1)} &= 1/\pi((1,1))\\
+&= 1/(3/420)\\
+&= 420/3\\
+&= 140
+\end{align*}
+
+Hence, the expected number of moves to return to corner $(1, 1)$ is $140$.
+
+\end{enumerate}
+
+\newpage
+\begin{problem}{3}
+Durrett, Exercise 1.64
+\end{problem}
+
+Let $p(x, y) = {N \choose y} (\rho_x)^y(1-\rho_x)^{N-y}$ where $\rho_x = (1 - u)x/N + v(N-x)/N$.
+\begin{enumerate}[label=(\alph*)]
+
+\item Suppose $u, v > 0$ and $\max \{u, v\} < 1$. Hence, $0 < u, v < 1$. Then,
+\begin{align*}
+\rho_x &= (1 - u)x/N + v(N-x)/N\\
+&< x/N + (N-x)/N\\
+&= N/N = 1
+\end{align*}
+
+In addition, $\rho_x > 0$ because, if $x = 0$, we have,
+\begin{align*}
+\rho_x = v > 0
+\end{align*}
+
+and if $x > 0$, we have,
+\begin{align*}
+\rho_x &=(1 - u) x/N + v(N-x)/N
+\end{align*}
+
+where $(1 - u), x, N, v, (N - x) > 0$.\\
+
+
+So then,
+\begin{align*}
+0 < p(x, y) &= {N \choose y} (\rho_x)^y(1-\rho_x)^{N-y}\\
+&< {N \choose y}
+\end{align*}
+
+Since $p(x, y) > 0$ for arbitrary $x, y$, we have that $p$ is irreducible. In addition, if we let $y = x$, then $p(x, x) > 0$ and $x$ has period 1. Since this holds for every $x$, we have that $p$ is aperiodic.\\
+
+Now we will check if the Kolmogorov Cycle Condition holds. Consider a cycle of states $x_0, x_1, \cdots, x_n = x_0$ with $p(x_{i-1}, x_i) > 0$ for $1 \leq i \leq n$. Then we have,
+\begin{align*}
+&\prod_{i=1}^n p(x_{i-1}, x_i) = \prod_{i=1}^n p(x_i, x_{i-1})\\
+\iff &\prod_{i=1}^n {N \choose x_i} (\rho_{x_{i-1}})^{x_i}(1-\rho_{x_{i-1}})^{N-x_i} = \prod_{i=1}^n {N \choose x_{i-1}} (\rho_{x_{i}})^{x_{i-1}}(1-\rho_{x_{i}})^{N-x_{i-1}}\\
+\iff &\prod_{i=1}^n (\rho_{x_{i-1}})^{x_i}(1-\rho_{x_{i-1}})^{N-x_i} = \prod_{i=1}^n (\rho_{x_{i}})^{x_{i-1}}(1-\rho_{x_{i}})^{N-x_{i-1}}\\
+\iff &(\rho_{x_0})^{x_1 - x_{n-1}}(1 - \rho_{x_0})^{x_{n-1} + x_1} + (\rho_{x_1})^{x_2 - x_{0}}(1 - \rho_{x_1})^{x_{0} + x_2} + \cdots\\
+&+ (\rho_{x_{n-1}})^{x_n - x_{n-2}}(1 - \rho_{x_{n-1}})^{x_{n} + x_{n-2}} = 1
+\end{align*}
+
+Suppose this holds. Then by Theorem 1.16, there is a stationary distribution for this Markov chain that satisfies detailed balance. We can now apply Theorem 1.19 (Convergence Theorem) in order to assert,
+\begin{align*}
+\lim_{n \to \infty} p^n(x, y) = \pi(y)
+\end{align*}
+
+as required.
+
+\item We need to find the mean,
+\begin{align*}
+v = \sum_y y \pi(y) = \lim_{n \to \infty} E_xX_n
+\end{align*}
+
+Not sure how to approach this one.
+\end{enumerate}
+
+\begin{problem}{4}
+\end{problem}
+
+We have that, from a starting distribution $\sigma$, a transition to any state (including $\sigma$ itself) has probability $1/52$
+
+\begin{enumerate}[label=(\Alph*)]
+\item It is clear that $|S| = 52!$ because there are $52!$ ways to shuffle a deck of cards.\\
+
+Moreover, fix a state $v_j \sigma$ in the column of $p$. That is, $v_j \sigma = X_{n+1}$. Let $v_j \sigma = (v_j, \sigma_1, \cdots, \sigma_51)$. Observe that it is possible to reach this state from the following states,
+\begin{align*}
+(v_j, \sigma_1, \cdots&, \sigma_{51})\\
+(\sigma_1, v_j, \sigma_2, &\cdots, \sigma_{51})\\
+&\vdots\\
+(\sigma_1, \cdots, &v_j, \sigma_{51})\\
+(\sigma_1, \cdots, &\sigma_{51}, v_j)
+\end{align*}
+
+So there $52$ possible initial states that can transition to $v_j \sigma$, and each will do so with probability $1/52$ by our assumption of the transition probability. Hence, the column sum for any fixed $v_j \sigma$ will be $1$, and so the transition matrix is doubly stochastic. Thus, we have that
+\begin{align*}
+\pi(\sigma) = \frac{1}{52!}
+\end{align*}
+
+for every $\sigma$.
+\newpage
+\item We have that there exists a stationary distribution. Now we need to show that $p$ is irreducible. Fix states $\sigma_1, \sigma_2 \in S$. The following algorithm will provide a path from $\sigma_1$ to $\sigma_2$:\\
+
+Examine $\sigma_{2_{52}}$, the card on the bottom of $\sigma_2$. Find the equivalent card in $\sigma_1$, and move this card to the top of the deck. Next, find the equivalent of $\sigma_{2_{51}}$ in $\sigma_1$, and move this card to the top of the deck. After these steps, we are left with,
+\begin{align*}
+\sigma_1 = (\sigma_{2_{51}}, \sigma_{2_{52}}, \sigma_{1_1}, \cdots, \sigma_{1_{52}})
+\end{align*}
+
+These moves are legal because any move where we take a card and move it to the top of the deck has probability $1/52$.\\
+
+If we continue in this manner, it is clear that we can transition from $\sigma_1$ to $\sigma_2$. Since both of these states were arbitrary, we have that any two states in the state space communicate, and so $p$ is irreducible. Hence, we can apply Theorem 1.21 and get,
+\begin{align*}
+\pi(\sigma) = 1/E_{\sigma}T_{\sigma}
+\end{align*}
+
+Hence, we have,
+\begin{align*}
+E_{\sigma}T_{\sigma} &= 1/\pi(\sigma)\\
+&= 1/(1/52!) = 52!
+\end{align*}
+
+for every $\sigma$.\\
+
+We are assuming that each step takes $1$ second, and we must give the answer in years. Since there are $31,536,000$ seconds in $1$ year, we get,
+\begin{align*}
+52!/31536000 = 2.56 \cdot 10^{60}
+\end{align*}
+
+This is the expected number of years it would take to return to the initial ordering $\sigma$ if each transition takes $1$ second.
+\end{enumerate}
+
+\end{document}
