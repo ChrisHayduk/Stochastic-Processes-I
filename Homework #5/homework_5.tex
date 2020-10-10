@@ -1,0 +1,398 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 5}
+
+\author{Chris Hayduk}
+\date{October 7, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+Durrett, Exercise 1.61
+\end{problem}
+
+\begin{enumerate}[label=(\Alph*)]
+
+\item We have that the transition matrix for this Markov chain is,
+\begin{align*}
+p &= \kbordermatrix{
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+    1 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5\\
+    2 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    3 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    4 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    5 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0\\
+    6 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0\\
+    7 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0\\
+    8 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0\\
+    9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0\\
+    10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0\\
+    11 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5\\
+    12 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0\\
+  }
+\end{align*}
+
+Now we need to find the stationary distribution $\pi$ such that,
+\begin{align*}
+\pi p = \pi
+\end{align*}
+
+Note that $p$ is doubly stochastic, so by Theorem 1.14, we have that $\pi(y) = 1/12$ for every $y$ in the state space. Observe also that $p$ is irreducible because we can follow the path $1 \to 2 \to 3 \to 4 \to 5 \to 6 \to 7 \to 8 \to 9 \to 10 \to 11 \to 12 \to 1$. Hence, every state communicates with every state.\\
+
+So now we can apply Theorem 1.12, which says,
+\begin{align*}
+\pi(y) = 1/E_yT_y
+\end{align*}
+
+
+Note that we are looking for $E_yT_y$, so we want $1/\pi(y)$. Thus, we have,
+\begin{align*}
+E_yT_y &= 1/\pi(y)\\
+&= 12
+\end{align*}
+
+for every $y$ in the state space.
+
+\item Without loss of generality, suppose we start at $12$ and our first step is to $1$. We will now treat $11$ and $12$ as absorbing states. By doing this, the only way to reach $11$ is via state $10$. Hence, we can simply look at the probability of reaching $11$ to ensure that we have hit every state.\\
+
+So we can re-write our transition probability as follows:
+\begin{align*}
+\tilde{p} &= \kbordermatrix{
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+    1 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5\\
+    2 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    3 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    4 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    5 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0 & 0\\
+    6 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 & 0\\
+    7 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0\\
+    8 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0\\
+    9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0\\
+    10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0\\
+    11 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+    12 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+  }
+\end{align*}
+
+We find numerically that,
+\begin{align*}
+\tilde{p}^{100000} &= \kbordermatrix{
+    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+    1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.09090909 & 0.90909091\\
+    2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.18181818 & 0.81818182\\
+    3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.27272727 & 0.72727273\\
+    4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.36363636 & 0.63636364\\
+    5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.45454545 & 0.54545455\\
+    6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.54545455 & 0.45454545\\
+    7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.63636364 & 0.36363636\\
+    8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.72727273 & 0.27272727\\
+    9 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.81818182 & 0.18181818\\
+    10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.90909091 & 0.09090909\\
+    11 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+    12 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+  }\\
+&= \tilde{p}^{100001}
+\end{align*}
+
+And so, we find that,
+\begin{align*}
+\lim_{n \to \infty} p^n(1, 11) &\approx 0.09090909
+\end{align*}
+
+This is the probability that the chain will visit all $11$ states before returning to state $12$.\\
+
+Since the structure of the graph is the same regardless of the starting state, this probability holds for any choice of state $X_0$.
+\end{enumerate}
+
+
+\begin{problem}{2}
+\end{problem}
+
+Suppose $p$ is the transition probability matrix for a Markov chain on $\mathcal{S}$. Let $\delta$ be defined on $\mathcal{S}$ such that $d(x,y) = 1$ if $x = y$ and $d(x,y) = 0$ otherwise.\\
+
+Now let $q = (p + \delta)/2$. Fix $x \in \mathcal{S}$. Let us consider the row $x$ in the matrix $q$. We have that,
+\begin{align*}
+q(x, y) &= p(x,y)/2
+\end{align*}
+
+for every $y \neq x$. Also, we have,
+\begin{align*}
+q(x, x) &= (1 + p(x, x))/2\\
+&= 1/2 + p(x, x)
+\end{align*}
+
+Since $p$ is a transition matrix, we have that,
+\begin{align*}
+p(x, y_1) + p(x, y_2) + p(x, y_3) + \cdots + p(x, x) + \cdots + p(x, y_n) = 1
+\end{align*}
+
+So,
+\begin{align*}
+&p(x, y_1)/2 + p(x, y_2)/2 + \cdots + p(x, x)/2 + \cdots + p(x, y_n)/2 = 1/2\\
+\iff &p(x, y_1)/2 + p(x, y_2)/2 + \cdots + 1/2 + p(x, x)/2 + \cdots + p(x, y_n)/2 = 1/2 + 1/2\\
+\iff &p(x, y_1)/2 + p(x, y_2)/2 + \cdots + (1 + p(x, x))/2 + \cdots + p(x, y_n)/2 = 1\\
+\iff &\sum_{y \in \mathcal{S}} q(x,y) = 1
+\end{align*}
+
+So every row of $q$ sums to $1$ as required.\\
+
+Now fix $y \neq x \in \mathcal{S}$ as well. Since $p$ is a transition probability matrix, we have that,
+\begin{align*}
+&0 \leq p(x, y) \leq 1\\
+\implies &0 \leq q(x,y) = p(x,y)/2 \leq 1/2 < 1
+\end{align*}
+
+So $0 \leq q(x,y) \leq 1$ when $x \neq y$. Now,
+\begin{align*}
+&0 \leq p(x, x) \leq 1\\
+\implies &1 \leq 1 + p(x, x) \leq 2\\
+\implies &0 < 1/2 \leq (1 + p(x,x))/2 \leq 1
+\end{align*}
+
+Thus, we also have $0 \leq q(x, x) \leq 1$. So every row of $q$ sums to $1$ and every entry of $q$ is greater than or equal to $0$ and less than or equal to $1$. Hence, $q$ defines a valid transition matrix.\\
+
+Now observe that $q$ is aperiodic if every state has period $1$. In addition, by Lemma 1.18, if $q(x, x) > 0$ for a state $x$, then $x$ has period 1. Consider $q(x,x)$ for some state $x$. We have that,
+\begin{align*}
+q(x,x) = 1/2 + p(x,x)/2
+\end{align*}
+
+Since $p$ is a valid transition probability matrix, we have $p(x,x) \geq 0$. Hence,
+\begin{align*}
+q(x,x) \geq 1/2
+\end{align*}
+
+Thus, for every state $x$, $q(x,x) > 0$ and therefore has period $1$. Hence, $q$ is aperiodic.
+
+\begin{problem}{3}
+\end{problem}
+
+\begin{enumerate}[label=(\Alph*)]
+
+\item Fix $x \in \mathcal{S}$ and $n \in \mathbb{N}$. Then,
+\begin{align*}
+(\mu_n p)(x) &= \frac{1}{n}(q(x)p(x) + q(x)p^2(x) + \cdots + q(x)p^n(x))
+\end{align*}
+
+So,
+\begin{align*}
+\left|(\mu_n p)(x) - \mu_n(x) \right| &= \left|\frac{1}{n}((qp)(x) + (qp^2)(x) + \cdots + (qp^n)(x)) - \frac{1}{n}(q(x) + (qp)(x) + \cdots + qp^{n-1})(x)) \right|\\
+&= \frac{1}{n} |(qp)(x) + (qp^2)(x) + \cdots + (qp^n)(x) - q(x) - (qp)(x) - \cdots - (qp^{n-1})(x)|\\
+&= \frac{1}{n} \left|(qp^n)(x) - q(x)\right|\\
+\end{align*}
+
+Observe that $0 \leq q(x), (qp^n)(x) \leq 1$, and so $-1 \leq (qp^n)(x) - q(x) \leq 1$. Thus,
+\begin{align*}
+\left|(\mu_n p)(x) - \mu_n(x) \right| &= \frac{1}{n} \left|(qp^n)(x) - q(x)\right|\\
+&\leq \frac{1}{n}
+\end{align*}
+
+\item Observe that, for every $x$ and for any $k \in \mathbb{N}$, we have,
+\begin{align*}
+0 \leq (qp^k)(x) \leq 1
+\end{align*}
+
+since $q$ defines a valid initial distribution and $p$ defines a valid transition probability matrix.\\
+
+Thus, for any $n \in \mathbb{N}$ and any $x \in \mathcal{S}$, we have,
+\begin{align*}
+\mu_n(x) &= \frac{1}{n} (q(x) + (qp)(x) + \cdots + (qp^{n-1})(x))\\
+&\geq \frac{1}{n}(0 + 0 + \cdots 0)\\
+&= 0
+\end{align*}
+
+as well as,
+\begin{align*}
+\mu_n(x) &= \frac{1}{n} (q(x) + (qp)(x) + \cdots + (qp^{n-1})(x))\\
+&\leq \frac{1}{n}(1 + 1 + \cdots 1)\\
+&= \frac{n}{n}\\
+&= 1
+\end{align*}
+
+Hence, we have $0 \leq \mu_n(x) \leq 1$, and so the sequence $\{\mu_n(x)\}$ is bounded. Note also that $\mu_n(x) \in \mathbb{R}$ for every $n$. As a result, we have that $\{\mu_n(x)\}$ is a bounded sequence in $\mathbb{R}$ for any choice of $x$. Thus, we can apply the Bolzano-Weierstrass theorem, which states that there exists a convergent subsequence $\mu_{n_k}(x)$.\\
+
+Consider $\mu_{n_k}$. That is, the convergent subsequence above without evaluating it at $x$. As shown above, every state $x \in \mathcal{S}$ has a corresponding convergent subsequence $\mu_{n_{k_x}}$. As such, we have $N$ convergent subsequences - one for each state in $\mathcal{S}$.
+
+\item Fix $x \in \mathcal{S}$ and define $\pi(x) = \lim_{k \to \infty} \mu_{n_k}(x)$. Then,
+\begin{align*}
+|(\pi p)(x) - \pi (x)| &= |\lim_{k \to \infty} \mu_{n_k} p - \lim_{k \to \infty} \mu_{n_k}|\\
+&= \frac{1}{n} |\lim_{k \to \infty} ((qp)(x) + \cdots + (qp^{n_k})(x)) - \frac{1}{n} \lim_{k \to \infty} (q(x) + (qp)(x) \cdots + (qp^{n_k-1})(x))|\\
+&= \frac{1}{n} \lim_{k \to \infty} |((qp)(x) + \cdots + (qp^{n_k})(x)) - (q(x) + (qp)(x) \cdots + (qp^{n_k-1})(x))|\\
+&= \frac{1}{n} \lim_{k \to \infty} |(qp^{n_k})(x) - q(x)|
+\end{align*}
+
+From part $(A)$, we have that $|(qp^{n_k})(x) - q(x)| \leq \frac{1}{n_k}$ for every $k$. So,
+\begin{align*}
+|(\pi p)(x) - \pi (x)|  &= \frac{1}{n} \lim_{k \to \infty} |(qp^{n_k})(x) - q(x)|\\
+&\leq \frac{1}{n} \lim_{k \to \infty} \frac{1}{n_k}\\
+&= 0
+\end{align*}
+
+Hence, we have $|(\pi p)(x) - \pi(x)| = 0$, which implies that $(\pi p)(x) = \pi(x)$. Since $x \in \mathcal{S}$ was arbitrary, this holds for every state. Thus,
+\begin{align*}
+\pi p = \pi
+\end{align*}
+
+and so $\pi$ is a stationary distribution for the chain.
+
+\end{enumerate}
+
+\newpage
+\begin{problem}{4}
+\end{problem}
+
+Let state $0$ denote that the musician is playing and state $1$ denote that the musician is upset. Then we have the following transition probability,
+\begin{align*}
+p &= \kbordermatrix{
+    & 0 & 1\\
+    0 & 1/2 & 1/2\\
+    1 & \sqrt{x/1000} & 1 - \sqrt{x/1000}
+  }
+\end{align*}
+
+where $0 \leq x \leq 1000$. We need to maximize the profit function $h(x) = 750 \cdot \frac{N_n(0)}{n} - x \cdot \frac{N_n(1)}{n}$.\\
+
+Note that $p$ is irreducible when $x \neq 0, 1000$ because both states communicate with themselves and each other. Note also that $p$ is closed under the same conditions for $x$. In addition, the state space is finite. So, by Theorem 1.7, all states in $p$ are recurrent. Thus, by Theorem 1.20, we have,
+\begin{align*}
+\frac{N_n(0)}{n} \to \frac{1}{E_0T_0}
+\end{align*}
+
+and
+
+\begin{align*}
+\frac{N_n(1)}{n} \to \frac{1}{E_1T_1}
+\end{align*}
+
+If we can find a stationary distribution $\pi$ for $p$, then we can apply Theorem 1.21 here. Hence, we will now attempt to compute a stationary distribution $\pi$. This yields,
+\begin{align*}
+&\pi p = \pi\\
+\iff &\begin{pmatrix}
+\pi_0 & \pi_1
+\end{pmatrix} \begin{pmatrix}
+    1/2 & 1/2\\
+    \sqrt{x/1000} & 1 - \sqrt{x/1000}
+\end{pmatrix}
+  = \begin{pmatrix}
+\pi_0 & \pi_1
+\end{pmatrix}
+\end{align*}
+
+So we need to solve,
+\begin{align*}
+1/2 \pi_0 + \pi_1 \sqrt{x/1000} &= \pi_0\\
+1/2 \pi_0 + \pi_1 (1 - \sqrt{x/1000}) &= \pi_1
+\end{align*}
+
+Observe that $\sqrt{x/1000}$ is a bijection between the intervals $(0, 1000)$ and $(0, 1)$. So let us replace $\sqrt{x/1000}$ with $y \in (0, 1)$ in the above equations:
+\begin{align*}
+1/2 \pi_0 + \pi_1 y &= \pi_0\\
+1/2 \pi_0 + \pi_1 (1 - y) &= \pi_1
+\end{align*}
+
+From these equations, we get,
+\begin{align*}
+\pi_0 &= \pi_0\\
+\pi_1 &= \frac{1}{2y} \pi_0
+\end{align*}
+
+We also have the condition that $\pi_1 + \pi_0 = 1$, so this yields,
+\begin{align*}
+&\pi_0 + \pi_1 = 1\\
+\iff &\pi_0 + \frac{1}{2y} \pi_0 = 1\\
+\iff &\pi_0 (1 + \frac{1}{2y}) = 1\\
+\iff &\pi_0 = \frac{1}{1 + \frac{1}{2y}}
+\end{align*}
+
+This yields,
+\begin{align*}
+\pi_0 &= \frac{1}{1 + \frac{1}{2y}} = \frac{2y}{2y+1}\\
+\pi_1 &= \frac{1}{2y+1}
+\end{align*}
+
+Now we have,
+\begin{align*}
+\pi p &= \begin{pmatrix}
+\frac{2y}{2y+1} & \frac{1}{2y+1}
+\end{pmatrix} \begin{pmatrix}
+    1/2 & 1/2\\
+    y & 1 - y
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\frac{2y}{2y+1} & \frac{1}{2y+1}
+\end{pmatrix}
+\end{align*}
+
+So indeed, we have that,
+\begin{align*}
+\pi &= \begin{pmatrix}
+\frac{2y}{2y+1} & \frac{1}{2y+1}
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\frac{2\sqrt{x/1000}}{2\sqrt{x/1000}+1} & \frac{1}{2\sqrt{x/1000}+1}
+\end{pmatrix}
+\end{align*}
+
+We can now use Theorem 1.21 together with Theorem 1.20 to state that,
+\begin{align*}
+\frac{N_n(y)}{n} \to \frac{1}{E_yT_y} = \pi(y)
+\end{align*}
+
+We can now re-write equation $h(x)$ using these relations,
+\begin{align*}
+h(x) = 750 \cdot \frac{2\sqrt{x/1000}}{2\sqrt{x/1000}+1} - x \cdot \frac{1}{2\sqrt{x/1000}+1}
+\end{align*}
+
+Taking the derivative yields,
+\begin{align*}
+h'(x) = \frac{-25(-750 \sqrt{10} + 100 \sqrt{x} + \sqrt{10}x)}{50 + \sqrt{10}\sqrt{x})^2\sqrt{x}}
+\end{align*}
+
+Setting $h'(x) = 0$ yields $x = 250$. We have $h(250) = 250$. We also need to check the endpoints of the interval, $x = 0$ and $x = 1000$. In these instances, we have $h(0) = 0$ and $h(1000) = \frac{500}{3} \approx 166.67$.\\
+
+Hence, we have that $h(x)$ attains its maximum when $x = 250$. Thus, in the long run, the manager should spend \$$250$ on each gift in order to maximize his overall net earnings.
+
+\end{document}
