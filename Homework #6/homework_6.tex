@@ -1,0 +1,211 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 6}
+
+\author{Chris Hayduk}
+\date{October 14, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+Durrett, Exercise 1.51
+\end{problem}
+
+We have the following transition matrix,
+
+
+\begin{align*}
+p = \kbordermatrix{
+    & HHH & HHT & HTH & THH & HTT & THT & TTH & TTT\\
+    HHH & 1/2 & 1/2 & 0 & 0 & 0 & 0 & 0 & 0\\
+    HHT & 0 & 0 & 1/2 & 0 & 1/2 & 0 & 0 & 0\\
+    HTH & 0 & 0 & 0 & 1/2 & 0 & 1/2 & 0 & 0\\
+    THH & 1/2 & 1/2 & 0 & 0 & 0 & 0 & 0 & 0\\
+    HTT & 0 & 0 & 0 & 0 & 0 & 0 & 1/2 & 1/2\\
+    THT & 0 & 0 & 1/2 & 0 & 1/2 & 0 & 0 & 0\\
+    TTH & 0 & 0 & 0 & 1/2 & 0 & 1/2 & 0 & 0\\
+    TTT & 0 & 0 & 0 & 0 & 0 & 0 & 1/2 & 1/2
+  }
+\end{align*}
+
+
+
+\begin{problem}{2}
+Durrett, Exercise 1.52
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Larry starts with $1$ coupon. That is, $X_0 = 1$. We also have the following transition probability:
+
+\begin{align*}
+p = \kbordermatrix{
+    & 0 & 1 & 2 & 3 \\
+    0 & 1 & 0 & 0 & 0\\
+    1 & 0.5 & 0 & 0.5 & 0\\
+    2 & 0 & 0.5 & 0 & 0.5\\
+    3 & 0 & 0 & 0 & 1\\
+  }
+\end{align*}
+
+We have $h(0) = 0$ and $h(3) = 1$ with the remaining finite set of states $\{1, 2\}$. Hence, we can apply Theorem 1.28, which gives us $h(x) = \sum_y p(x, y) h(y)$. In addition, since $P_x(V_{\{0\}} \wedge V_{\{3\}} < \infty) > 0$ for $x = 1, 2$, we also have that $h(x) = P_x(V_3 < V_0)$. We have $q = p = 0.5$, so for $0 < x < 3$, we get,
+\begin{align*}
+h(x) = 0.5h(x+1) + 0.5h(x-1)
+\end{align*}
+
+We get,
+\begin{align*}
+h(1) &= 0.5h(2)\\
+h(2) &= 0.5 + 0.5h(1)
+\end{align*}
+
+Combining equation $(1)$ and $(2)$ yields $h(2) = 0.5/0.75 \approx 0.667$. Hence, we have,
+\begin{align*}
+h(1) = P_1(V_3 < V_0) &= \frac{0.25}{0.75}\\
+\approx 0.333
+\end{align*}
+
+\item We have the following system of equations,
+\begin{align*}
+g(1) &= 1 + 0.5g(2)\\
+g(2) &= 1 + 0.5g(1)
+\end{align*}
+
+So we get that $g(2) = 1 + 0.5 + 0.25g(2) = 2$ and thus $g(1) = 1 + 0.5(2) = 2$ as well.\\
+
+Hence, starting from $1$ ticket, Larry will need $2$ plays on average in order to win or lose the game.
+
+\end{enumerate}
+
+\begin{problem}{3}
+Durrett, Exercise 1.67
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Observe that for $X_n = n$ with $0 \leq n \leq 5$, we there are $n$ sides of the die which have already been seen and $6 - n$ sides which have not been seen. Since each side is equally probable to show up, we have that,
+\begin{align*}
+P(X_{n+1} = n) &= n/6\\
+P(X_{n+1} = n + 1) &= (6-n)/6
+\end{align*}
+
+When $X_n = 6$, we have $P(X_{n+1} = 6) = 1$.\\
+
+Thus, the transition probability matrix is,
+
+\begin{align*}
+p &= \kbordermatrix{
+    & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+    1 & 0 & 1/6 & 5/6 & 0 & 0 & 0 & 0\\
+    2 & 0 & 0 & 2/6 & 4/6 & 0 & 0 & 0\\
+    3 & 0 & 0 & 0 & 3/6 & 3/6 & 0 & 0\\
+    4 & 0 & 0 & 0 & 0 & 4/6 & 2/6 & 0\\
+    5 & 0 & 0 & 0 & 0 & 0 & 5/6 & 1/6\\
+    6 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+  }
+\end{align*}
+
+\item Let $T = \min \{n: X_n = 6\}$. We need to find $ET$. That is, $ET$ the expected minimum number of rolls to see all $6$ sides of the die.\\
+
+Consider the matrix after deleting the row and column corresponding to $6$:
+\begin{align*}
+r &= \kbordermatrix{
+    & 0 & 1 & 2 & 3 & 4 & 5\\
+    0 & 0 & 1 & 0 & 0 & 0 & 0\\
+    1 & 0 & 1/6 & 5/6 & 0 & 0 & 0\\
+    2 & 0 & 0 & 2/6 & 4/6 & 0 & 0\\
+    3 & 0 & 0 & 0 & 3/6 & 3/6 & 0\\
+    4 & 0 & 0 & 0 & 0 & 4/6 & 2/6\\
+    5 & 0 & 0 & 0 & 0 & 0 & 5/6\\
+  }
+\end{align*}
+
+So we have,
+\begin{align*}
+I - r = \kbordermatrix{
+    & 0 & 1 & 2 & 3 & 4 & 5\\
+    0 & 1 & -1 & 0 & 0 & 0 & 0\\
+    1 & 0 & 5/6 & -5/6 & 0 & 0 & 0\\
+    2 & 0 & 0 & 4/6 & -4/6 & 0 & 0\\
+    3 & 0 & 0 & 0 & 3/6 & -3/6 & 0\\
+    4 & 0 & 0 & 0 & 0 & 2/6 & -2/6\\
+    5 & 0 & 0 & 0 & 0 & 0 & 1/6\\
+  }
+\end{align*}
+
+This yields,
+\begin{align*}
+(I - r)^{-1} &= \kbordermatrix{
+    & 0 & 1 & 2 & 3 & 4 & 5\\
+    0 & 1 & 6/5 & 3/2 & 2 & 3 & 6\\
+    1 & 0 & 6/5 & 3/2 & 2 & 3 & 6\\
+    2 & 0 & 0 & 3/2 & 2 & 3 & 6\\
+    3 & 0 & 0 & 0 & 2 & 3 & 6\\
+    4 & 0 & 0 & 0 & 0 & 3 & 6\\
+    5 & 0 & 0 & 0 & 0 & 0 & 6\\
+  }
+\end{align*}
+
+Lastly, we have
+\begin{align*}
+(I - r)^{-1} \mathbbm{1} &= \begin{pmatrix}
+14.7\\
+13.7\\
+12.5\\
+11\\
+9\\
+67
+\end{pmatrix}
+\end{align*}
+
+Thus, starting from state $0$, we would expect to make $14.7$ moves on average before seeing all $6$ sides of the die.
+\end{enumerate}
+
+\end{document}
