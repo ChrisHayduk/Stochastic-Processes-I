@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.19)  21 OCT 2020 01:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.19)  21 OCT 2020 23:54
 entering extended mode
 **./midterm.tex
 (midterm.tex
@@ -474,48 +474,68 @@ LaTeX Font Info:    Try loading font information for U+bbm on input line 142.
 ("C:\Users\chris\AppData\Local\Programs\MiKTeX 2.9\tex/latex/bbm\ubbm.fd"
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
-[2] [3]
-<cube.png, id=23, 163.20975pt x 136.71075pt>
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
+
+ []
+
+[3]
+<cube.png, id=24, 163.20975pt x 136.71075pt>
 File: cube.png Graphic file (type png)
 <use cube.png>
-Package pdftex.def Info: cube.png  used on input line 188.
+Package pdftex.def Info: cube.png  used on input line 179.
 (pdftex.def)             Requested size: 163.20934pt x 136.7104pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--206
+Underfull \hbox (badness 10000) in paragraph at lines 196--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
 
  []
 
 [4 <./cube.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 230--231
+Underfull \hbox (badness 10000) in paragraph at lines 221--222
 
  []
 
 [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 307--308
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 311--312
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
 
  []
 
-[7] [8] (midterm.aux) ) 
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 329--330
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
+
+ []
+
+[9] [10] (midterm.aux) ) 
 Here is how much of TeX's memory you used:
  4204 strings out of 492895
  62861 string characters out of 3123735
@@ -524,26 +544,27 @@ Here is how much of TeX's memory you used:
  42407 words of font info for 60 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,15n,32p,731b,316s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\chris\AppData\Local\MiKTeX\2.9\fonts/pk/ljfou
-r/public/bbm/dpi600\bbm12.pk>{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/
-fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 
-2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 
-2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/chris/AppData/Local/Programs/MiK
-TeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/chris/AppData/Local/Programs
-/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Users/chris/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Users/chris/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Users/chris/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/chris/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/chris/AppData
-/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/chris/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/chris/A
-ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/chris
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/chr
-is/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users
-/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on midterm.pdf (8 pages, 171830 bytes).
+{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fonts
+/enc/dvips/lm/lm-mathit.enc} <C:\Users\chris\AppData\Local\MiKTeX\2.9\fonts/pk/
+ljfour/public/bbm/dpi600\bbm12.pk>{C:/Users/chris/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/chris/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/chris/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/chris/AppData/Local/Program
+s/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Users/chris/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Users/chris/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Users/chris/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/chris/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi6.pfb><C:/Users/chris/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/chris/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/chris/
+AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/chr
+is/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/c
+hris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users
+/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/U
+sers/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
+Output written on midterm.pdf (10 pages, 184662 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
+ 94 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

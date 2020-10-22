@@ -58,9 +58,9 @@
 
 \begin{enumerate}[label=(\Alph*)]
 
-\item We know the deck contains 10 cards and that the draws are independent and uniform. Hence, the probability of drawing any single card is $\frac{1}{10}$. So, if we suppose that we have seen a certain card $i$ times in a row, the probability of selecting that card for the $i+1$ time in a row would be $\frac{1}{10}$. Thus, it is clear that, for $n \geq 1$, we have $P(X_{n+1} = i + 1 | X_{n} = i, X_{n-1} = i_{n_1}, \cdots X_0 = 0) = \frac{1}{10} = P(X_{n+1} = i + 1 | X_{n} = i)$.\\
+\item We know the deck contains 10 cards and that the draws are independent and uniform. Hence, the probability of drawing any single card is $\frac{1}{10}$. So, if we suppose that we have seen a certain card $i$ times in a row, the probability of selecting that card for the $i+1$ time in a row would be $\frac{1}{10}$. Thus, it is clear that, for $i \geq 1$, we have $P(X_{n+1} = i + 1 | X_{n} = i, X_{n-1} = i_{n_1}, \cdots X_0 = 0) = \frac{1}{10} = P(X_{n+1} = i + 1 | X_{n} = i)$.\\
 
-In the case of $n = 0$, we have $X_0 = 0$ by definition. In addition, note that $P(X_{n+1} = 0 | X_{n} = i) = \frac{9}{10}$ for $i \neq 0$. Since $X_{n+1} = i + 1, X_{n+1} = 0$ are the only possible transitions from $X_n = i, i \neq 0$, we have that they add up to $1$ as required. Moreover, we can define any other transitions as $0$ probability, so $p(i, j) \geq 0$ for any $i, j$ in the state space as required. In the case of $i = 0$, these conditions still hold, as the only possible transition is $P(X_{n+1} = 1 | X_n = 0) = 1$.\\
+In the case of $n = 0$, we have $X_0 = 0$ by definition. In addition, note that $P(X_{n+1} = 0 | X_{n} = i) = \frac{9}{10}$ for $i \neq 0$. Since $X_{n+1} = i + 1, X_{n+1} = 0$ are the only possible transitions from $X_n = i, i \neq 0$, we have that they add up to $1$ as required. Moreover, we can define any other transitions as $0$ probability, so $p(i, j) \geq 0$ for any $i, j$ in the state space as required. In the case of $i = 0$, these conditions still hold, as the only possible transition is $P(X_{n+1} = 1 | X_n = 0) = 1$ since we must choose a card.\\
 
 As a result, we have that this defines a valid Markov chain with the following transition probability matrix,
 \begin{align*}
@@ -147,39 +147,30 @@ So the expected number of moves starting from state $0$ is $211,111,110$. For a 
 &= 1 \times 10^{-8}
 \end{align*}
 
-So our answer makes sense given the extremely low probability of reaching state $9$.
+So our answer makes sense given the extremely low probability of seeing $9$ identical cards in a row.
 \end{enumerate}
 
 \begin{problem}{2}
 \end{problem}
 
-The system of equations for $f_1$ is,
+Let us first examine $f_n(d)$. After computing the recursion for the first few values of $n$, we get,
 \begin{align*}
-f_1(a) &= \frac{1}{3}\\
-f_1(b) &= \frac{1}{6}\\
-f_1(c) &= \frac{1}{3}\\
-f_1(d) &= 0\\
-f_1(e) &= \frac{1}{6}
+f_0(d) &= 0\\
+f_1(d) &= \frac{f_0(c) + f_0(e)}{2} = 0\\
+f_2(d) &= \frac{f_0(a) + f_0(b) +f_0(d) + f_0(d)}{4} = \frac{f_0(a) + f_0(b)}{4} = \frac{1}{4}\\
+f_3(d) &= \frac{f_0(a) + f_0(b) + 3f_0(c) + 3f_0(e)}{8} = \frac{f_0(a) + f_0(b)}{8} = \frac{1}{8}\\
+f_4(d) &= \frac{4f_0(a) + 4f_0(b) + f_0(c) + 6f_0(d) + f_0(e)}{16} = \frac{4f_0(a) + 4f_0(b)}{16} = \frac{4}{16}\\
+f_5(d) &= \frac{5f_0(a) + 5f_0(b) + 10f_0(c) + 2f_0(d) + 10f_0(e)}{32} = \frac{5f_0(a) + 5f_0(b)}{32} = \frac{5}{32}\\
+f_6(d) &= \frac{15f_0(a) + 15f_0(b) + 7f_0(c) + 20f_0(d) + 7f_0(e)}{64} = \frac{15f_0(a) + 15f_0(b)}{64} = \frac{15}{64}\\
+f_7(d) &= \frac{22f_0(a) + 22f_0(b) + 35f_0(c) + 14f_0(d) + 35f_0(e)}{128} = \frac{22f_0(a) + 22f_0(b)}{128} = \frac{22}{128}\\
+&\vdots
 \end{align*}
 
-Then for $f_2$ we have,
-\begin{align*}
-f_2(a) &= \frac{1}{6}\\
-f_2(b) &= \frac{1}{6}\\
-f_2(c) &= \frac{1}{12}\\
-f_2(d) &= \frac{1}{4}\\
-f_2(e) &= \frac{1}{6}
-\end{align*}
+I believe this is converging to $\frac{f_0(a) + f_0(b) + f_0(c) + f_0(d) + f_0(e)}{5} = 0.2$ (ie. the average value of the original pentagon vertices), with the even terms converging from above and the odd terms converging from below. I claim that $f_n$ converges to this value for any $x \in \{a, b, c, d, e\}$.\\
 
-And for $f_3$, 
-\begin{align*}
-f_3(a) &= \frac{1}{12}\\
-f_3(b) &= \frac{1}{8}\\
-f_3(c) &= \frac{5}{24}\\
-f_3(d) &= \frac{1}{8}\\
-f_3(e) &= \frac{5}{12}
-\end{align*}
+Observe that the denominator is $2^n$ and there are $2^n$ terms of $f_0$ in the numerator for all $n \geq 1$. I claim that the proportion of terms in the numerator which belong to the non-zero $f_0$ values (ie. $f_0(a)$ and $f_0(b)$) approaches $\frac{2^n}{5}$. That is, the function approaches $\frac{(2^n/5) \cdot (f_0(a) + f_0(b))}{2^n}$
 
+\newpage
 \begin{problem}{3}
 \end{problem}
 
@@ -297,7 +288,7 @@ For a quick sanity check, we compute the matrix powers of $\tilde{p}$ (done in t
     }
 \end{align*}
 
-Hence, we have $P(V_a < V_b | X_0 = d) = P(V_a < V_b | X_0 = h) = P(V_a < V_B | X_0 = f) = 0.6 = \frac{3}{5}$ as required.
+Hence, we have $P(V_a < V_b | X_0 = d) = P(V_a < V_b | X_0 = h) = P(V_a < V_B | X_0 = f) = 0.6 = \frac{3}{5}$ as we have shown above.
 
 \begin{problem}{4}
 \end{problem}
@@ -328,13 +319,83 @@ P_0(T_0 < \infty) &= 1 - P_0(T_0 = \infty)\\
 &= 1 - 0 = 1
 \end{align*}
 
-Hence, $0$ is recurrent in the sense that we will certainly return. Now consider $E_0T_0$. Note that from each state $x$, we have probability $1/4$ of returning to $0$. Define $g(x)$ as the function which denotes the expected time to return to $0$ from state $x$. Then we have,
+Hence, $0$ is recurrent in the sense that we will certainly return. Now consider $E_0T_0$. Note that from each state $x$, we have probability $1/4$ of returning to $0$, and probability $3/4$ of continuing to state $x+1$. Hence, we can consider each state to be an independent trial where we have probability $1/4$ of reaching $0$ and probability $3/4$ of not reaching $0$. Thus we can model this problem as an unfair coin with $1/4$ chance of heads and $3/4$ chance of tails.\\
+
+Hence, we can use the geometric distribution, which models the number of Bernoulli trials needed to get one success. The mean of this sequence is $1/p$ where $p$ is the probability of success. In our case, $p = 1/4$, so we have
 \begin{align*}
-g(x) = 1 + \frac{3}{4}g(x+1)
+\frac{1}{p} &= 4
 \end{align*}
 
-So, we have,
+Since this is the mean number of trials before we reach $1$ success (ie. a return to state $0$), then we have that this is precisely $E_0T_0$. Hence, $E_0T_0 = 4 < \infty$. Hence $0$ is a positive recurrent state.\\
+
+Now, since the chain is irreducible and $0$ is a positive recurrent state, by Theorem 1.30 in Durrett, we have that all states are positive recurrent. Thus, the chain is positive recurrent. In addition, Theorem 1.30 tells us that there exists a stationary distribution $\pi$. Hence, we need to find $\pi$ such that,
 \begin{align*}
-g(0) &= 1 + \frac{3}{4} \sum_{i = 1}^{\infty}g(i)
+\pi p = \pi
 \end{align*}
+
+where $p$ is the transition probability matrix, which is given by,
+\begin{align*}
+p = \kbordermatrix{
+    & 0 & 1 & 2 & 3 & 4 & \cdots \\
+    0 & 1/4 & 3/4 & 0 & 0 & 0 & \cdots\\
+    1 & 1/4 & 0 & 3/4 & 0 & 0 & \cdots\\
+    2 & 1/4 & 0 & 0 & 3/4 & 0 & \cdots\\
+    3 & 1/4 & 0 & 0 & 0 & 3/4 & \cdots\\
+    \vdots & & & \vdots & & & \cdots
+  }
+\end{align*}
+
+So, if we let $\pi$ be given by,
+\begin{align*}
+\pi = \begin{pmatrix}
+\pi_0 & \pi_1 & \pi_2 & \pi_3 & \cdots
+\end{pmatrix}
+\end{align*}
+
+Then we get that $\pi p = \pi$ implies,
+\begin{align*}
+\frac{1}{4} \sum_{i=0}^{\infty} \pi_i &= \pi_0\\
+\frac{3}{4} \pi_0 &= \pi_1\\
+\frac{3}{4} \pi_1 &= \pi_2\\
+\frac{3}{4} \pi_2 &= \pi_3\\
+&\vdots
+\end{align*}
+
+We can use the above equations to define $\pi_i$ with $i \geq 1$ in terms of $\pi_0$. We get,
+\begin{align*}
+\pi_i = \left(\frac{3}{4}\right)^i\pi_0
+\end{align*}
+
+Since $\pi$ defines a valid distribution, we also need $\sum_{i=0}^{\infty} \pi(i) = 1$. This yields,
+\begin{align*}
+&\sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i\pi_0 = 1\\
+\implies &\pi_0 \sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i = 1
+\end{align*}
+
+We have that $\sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i$ converges to $4$, so this gives us,
+\begin{align*}
+&\pi_0 \sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i = 1\\
+\implies &4\pi_0 = 1\\
+\implies &\pi_0 = \frac{1}{4}
+\end{align*}
+
+Verifying this value in the equation for $\pi_0$ gives us,
+\begin{align*}
+&\frac{1}{4} \sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i\pi_0 = \pi_0\\
+\implies &\frac{1}{4} \pi_0 \sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i = \pi_0\\
+\implies &\frac{1}{4} \cdot \frac{1}{4} \cdot \sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i = \frac{1}{4}\\
+\implies &\frac{1}{16} \cdot 4 = \frac{1}{4}\\
+\implies &\frac{1}{4} = \frac{1}{4}
+\end{align*}
+
+as required. In addition, since $0 \leq \left(\frac{3}{4}\right)^i\pi_0 \leq 1/4$ for every $i \geq 0$, along with the fact that $\sum \pi_i = 1$, we have that $\pi$ defines a valid probability distribution.\\
+
+Thus, we have that the stationary distribution is given by,
+\begin{align*}
+\pi_i &= \frac{1}{4} \cdot  \left(\frac{3}{4}\right)^i\\
+&= \frac{3^i}{4^{i+1}}
+\end{align*}
+
+for all $i \geq 0$.
+
 \end{document}
