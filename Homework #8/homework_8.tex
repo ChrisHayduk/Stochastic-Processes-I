@@ -1,0 +1,248 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 8}
+
+\author{Chris Hayduk}
+\date{November 7, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+Durrett, Exercise 2.20
+\end{problem}
+
+We have that the cars arrive at a rate of $6$ per hour and each car will take the professor into town with probability $1/3$. We can model the probability that a car will pick a professor up as a Poisson process with rate $6 \cdot 1/3 = 2$. We are looking for the probability that he will take the bus, so we want to model the probability that he will not be picked up by any cars. That is, we want $N(t) = 0$ for all $t$. By the derivation in Lemma 2.6, we have that,
+\begin{align*}
+P(N(t) = 0) &= e^{-2t} \cdot \frac{(-2t)^0}{0!}\\
+&= e^{-2t}
+\end{align*}
+
+Now we know that the waiting time for the next bus is uniform on $(0, 1)$. Hence, we need to integrate this function over the interval $(0, 1)$ in order to get the probability that no cars pick the professor up. We get,
+\begin{align*}
+\int_0^1 e^{-2t} dt &= -\frac{1}{2}e^{-2t} \Big|_0^1\\
+&= -\frac{1}{2} \left[e^{-2} - e^{0} \right]\\
+&= \frac{1 - e^{-2}}{2}\\
+&\approx 0.432
+\end{align*}
+
+\begin{problem}{2}
+Durrett, Exercise 2.50
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Let $T_1$ by the lifespan of battery $1$ and $T_2$ be the lifespan of battery $2$. Since these are both independent exponential variables with mean $100$, we can define $S_1 = \min(T_1, T_2)$ with mean $200$. When one of the batteries fails, it is replaced by another battery. Assume without loss of generality that battery $1$ is replaced with battery $3$. By the memoryless property of exponential variables, the expected lifetime for battery $2$ given that it has been in the flashlight for $x$ hours is still $100$ hours. Hence, each $S_i$ is an independent random exponential with mean $200$.\\
+
+$T$ is the time at which there is one working battery left. Note that for the starting conditions of $S_1$, we have that there are $n-2$ unused batteries and $2$ batteries in the flashlight. At $S_2$, we have 1 failed battery, $n-3$ unused batteries, and $2$ batteries in the flashlight. If we continue until $S_{n-1}$, we see that we have $n-2$ failed batteries and $2$ working battery. Hence, since $S_1, \ldots, S_{n-1}$ are independent, we have that,
+\begin{align*}
+T = S_1 + \cdots + S_{n-1}
+\end{align*}
+
+This is true because after a battery fails in $S_{n-1}$, we are left with $1$ working battery as desired.\\
+
+By the linearity of expectation, we have,
+\begin{align*}
+E(T) &= E(S_1) + \cdots + E(S_{n-1})\\
+&= 200 + \cdots + 200\\
+&= 200(n-1)
+\end{align*}
+
+Hence, the expected time until there is $1$ working battery left is $200(n-1)$, where $n$ is the initial number of working batteries.
+
+\item Note that the $i$th battery is placed in the flashlight when the $i - 2$ battery fails. For example, when the first battery fails, battery $3$ is placed in the flashlight; when the second battery fails, battery $4$ is placed in the flashlight; and so on. Hence, the $i$th battery must outlast the other battery in the flashlight as well as the $n - i$ remaining batteries from when it enters the flashlight. That is, it must outlast $n - i + 1$ batteries. The exception is when $i = 1$, where battery $1$ must outlast $n-1$ other batteries.\\
+
+Now let $X, Y$ be the lifespans of two batteries. These are independent exponential random variables, both with mean $100$. Hence, their joint density is given by,
+\begin{align*}
+\frac{1}{10000}e^{-(x/100 + y/100)}
+\end{align*}
+
+So,
+\begin{align*}
+P(X < Y) &= \int_0^{\infty} \int_0^y \frac{1}{10000}e^{-(x/100 + y/100)} dx \ dy\\
+&= \int_0^{\infty} 1/100 \cdot e^{-y/100} \int_0^y 1/100 \cdot e^{-x/100} dx \ dy\\
+&= \int_0^{\infty} 1/100 \cdot e^{-1/100 y} \cdot (1 - e^{-y/100}) dy\\
+&= \int_0^{\infty} 1/100 e^{-y/100} dy - \int_0^{\infty} 1/100 e^{-(1/100 + 1/100) \cdot y} dy\\
+&= 1 - \frac{1/100}{1/100 + 1/100}\\
+&= 1 - \frac{1}{2}\\
+&= \frac{1}{2}
+\end{align*}
+
+Hence, the probability that $X$ fails before $Y$ is $1/2$. However, note that due to the memoryless property of exponential variables, if $Y$ fails and we replace it with $Z$, the probability that $X$ fails before $Z$ is still $1/2$.\\
+
+Hence, we have that $$P((X < Y) \cap (X < Z) = P(X < Y) \cdot P(X < Z) = 1/2 \cdot 1/2 = 1/4$$
+
+This holds for any number of consecutive comparisons between batteries. Combining this with what we have shown above (in regards to the number of batteries that the $i$th battery will need to outlast), we get the following:
+\begin{align*}
+P(N = k) = \begin{cases}
+\left(\frac{1}{2}\right)^{n - 1} & k = 1\\
+\left(\frac{1}{2}\right)^{n - k + 1} & \text{otherwise}
+\end{cases}
+\end{align*}
+
+Note that for all $k$ we have,
+\begin{align*}
+P(N = k) > 0
+\end{align*}
+
+and,
+\begin{align*}
+P(N = 1) + \sum_{k=2}^{n} P(N = k) &= \left(\frac{1}{2}\right)^{n - 1} + \sum_{k = 2}^n \left(\frac{1}{2}\right)^{n - k + 1}\\
+&= 1
+\end{align*}
+
+Hence, this defines a valid probability distribution.
+\end{enumerate}
+
+\begin{problem}{3}
+Durrett, Exercise 2.52
+\end{problem}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Note that in a Poisson process, $T_n = \tau_1 + \cdots + \tau_n$ denotes the arrival time of the $n$th customer. We want to find $P(\max(T_1, \ldots, T_n) < s)$. By Theorem 2.15, if we condition on $N(t)$ then the set of arrival times $\{T_1, \ldots T_n\}$ is independently and uniformly distributed on $[0, t]$. Hence, we have that,
+\begin{align*}
+P(\max(T_1, \ldots, T_n) < s) = \frac{s^n}{t^n}
+\end{align*}
+
+Hence, we have that,
+\begin{align*}
+E[L \ | \ N(t) = n] = \frac{nt}{n+1}
+\end{align*}
+
+Thus,
+\begin{align*}
+E[L] &= \sum_{n=0}^{\infty} E[L \ | \ N(t) = n] \cdot P(N(t) = n)\\
+&= \sum_{n=0}^{\infty} E[\max\{T_1, \ldots, T_n\} \ | \ N(t) = n] \cdot P(N(t) = n)\\
+&= \sum_{n=0}^{\infty} \frac{nt}{n+1} P(N(t) = n)\\
+&= \sum_{n=0}^{\infty} \left(1 - \frac{1}{n+1} \right)t \frac{(\lambda t)^n}{n!} e^{-\lambda t}\\
+&= te^{-\lambda t} \sum_{n=0}^{\infty} \frac{(\lambda t)^n}{n!} - te^{-\lambda t} \sum_{n=0}^{\infty} \frac{1}{n+1} \frac{(\lambda t)^n}{n!}\\
+&= t - te^{-\lambda t}\frac{1}{\lambda t} (e^{\lambda t} - 1)\\
+&= t - \frac{1}{\lambda}(1 - e^{-\lambda t})
+\end{align*}
+
+Hence, we can conclude with,
+\begin{align*}
+E[t - L] &= E[t] - E[L]\\
+&= t - (t - \frac{1}{\lambda}(1 - e^{-\lambda t}))\\
+&= \frac{1}{\lambda}(1 - e^{-\lambda t})
+\end{align*}
+
+\item If we let $t \to \infty$, we get,
+\begin{align*}
+\lim_{t \to \infty} E[t - L] &= \lim_{t \to \infty} \frac{1}{\lambda}(1 - e^{-\lambda t})\\
+&= \frac{1}{\lambda} \lim_{t \to \infty} (1 - e^{-\lambda t})\\
+&= \frac{1}{\lambda}
+\end{align*}
+
+\end{enumerate}
+
+\begin{problem}{4}
+\end{problem}
+
+\begin{enumerate}[label=(\Alph*)]
+
+\item Suppose $N(t)$ has jump of size bigger than $1$ in $I_k^{(n)} = (a, b)$. Then there exists $t_1, t_2 \in I_k^{(n)} = (a, b)$ such that $N(t_1) - N(t_2) \geq 2$. Now note that, for any $t, s$, we are given by axiom $(ii)$ that $N(t+s) - N(s) = \text{Poisson}(\lambda t)$. By the definition of a Poisson distribution, $N(t + s) - N(s)$ can only take on non-negative integers as values (i.e. $0, 1, 2, \ldots$). Hence,
+\begin{align*}
+N((t_2 - a) + a) - N(a) = N(t_2) - N(a) \geq 0
+\end{align*}
+
+Similarly,
+\begin{align*}
+N((b - t_1) + t_1) - N(t_1) = N(b) - N(t_1) \geq 0
+\end{align*}
+
+These two inequalities imply that,
+\begin{align*}
+N(t_2) \geq N(a)
+\end{align*}
+
+and
+\begin{align*}
+N(b) \geq N(t_1)
+\end{align*}
+
+This gives us that,
+\begin{align*}
+N(b) - N(a) \geq N(t_1) - N(t_2) \geq 2
+\end{align*}
+
+Now we want to find an upper bound for $P(N(b) - N(a) \geq 2)$. We can reformulate this as $1 - P(N(b) - N(a) < 2)$, which becomes,
+\begin{align}
+1 - \left[P(N(b) - N(a) = 1) + P(N(b) - N(a) = 0)\right]
+\end{align}
+
+Again using axiom $(ii)$, we have that $N(b) - N(a) = \text{Poisson}(\lambda (b-a))$. Hence, we get that,
+\begin{align*}
+P(N(b) - N(a) = 0) = e^{-\lambda (b-a)}
+\end{align*}
+
+and,
+\begin{align*}
+P(N(b) - N(a) = 1) = e^{-\lambda (b-a)} \cdot \lambda \cdot (b-a)
+\end{align*}
+
+Plugging these values into equation $(1)$ yields,
+\begin{align}
+P(N(b) - N(a) \geq 2) = 1 - e^{-\lambda (b-a)}  \left( \lambda \cdot (b-a) + 1 \right)
+\end{align}
+
+\item Now let's let $n \to \infty$. That is, the length of each open interval in $I_k^{(n)}$ will be given by $\frac{1}{n} \to 0$. Hence, we have that $b - a \to 0$ as $n \to \infty$. Using this in equation $(2)$ yields,
+\begin{align*}
+\lim_{(b-a) \to 0} P(N(b) - N(a) \geq 2) &= \lim_{(b-a) \to 0} [1 - e^{-\lambda (b-a)}  \left( \lambda \cdot (b-a) + 1 \right)]\\
+&=  \lim_{(b-a) \to 0} 1 -  \lim_{(b-a) \to 0} e^{-\lambda (b-a)} \cdot \lambda \cdot (b-a) - \lim_{(b-a) \to 0} e^{-\lambda (b-a)}\\
+&= 1 - 1 = 0
+\end{align*}
+
+Hence, as we divide the interval $[0, M]$ into smaller subintervals, the probability that there is a jump greater than or equal to $2$ approaches $0$ in each subinterval. Since the probabilities are disjoint, we can sum up the probabilities of these subintervals, which will sum to $0$. Thus,
+\begin{align*}
+P(N(t) \ \text{has a jump size} \ \geq 2 \ \text{in} \ [0, M]) = 0
+\end{align*}
+\end{enumerate}
+
+\end{document}
