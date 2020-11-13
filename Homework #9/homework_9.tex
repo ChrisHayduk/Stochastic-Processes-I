@@ -77,7 +77,7 @@ Durrett, Exercise 2.33
 
 \begin{enumerate}[label=\alph*]
 
-\item Given that the customers arrived in the first 5 minutes, the probability that each of them arrived in the first 2 minutes is $2/5$. The arrival times for customers are independent, hence the probability that both customers arrived in the first 2 minutes is given by,
+\item By Theorem 2.15, the set of arrival times $\{T_1, T_2\}$ has the same distribution as $\{U_1, U_2\}$, which are independent and uniformly distributed on $[0, t]$. Given that the customers arrived in the first 5 minutes, the arrival times are uniformly distributed on $[0, 5]$, and so the probability that each of them arrived in the first 2 minutes is $2/5$. The arrival times for customers are independent, hence the probability that both customers arrived in the first 2 minutes is given by,
 \begin{align*}
 (2/5) \cdot (2/5) &= 4/25\\
 &= 0.16
@@ -91,13 +91,67 @@ Durrett, Exercise 2.33
 
 \end{enumerate}
 
+\newpage
+
 \begin{problem}{3}
 Durrett, Exercise 2.54
 \end{problem}
 
+We have,
+\begin{align*}
+ES(t) &= E \left[ S_0 \prod_{i = 1}^{N(t)} X_i \right]\\
+&= S_0 E \left [ \prod_{i = 1}^{N(t)} X_i \right]
+\end{align*}
+
+By the independence of the $X_i$ variables, we get,
+\begin{align*}
+ES(t) &= S_0 \prod_{i = 1}^{N(t)} EX_i\\
+&= S_0 \prod_{i=1}^{N(t)} \mu\\
+&= S_0 \cdot \mu^{N(t)}
+\end{align*}
+
+Now note that since $\text{Var}(X_i) = \sigma^2$ for each $i$, we have,
+\begin{align*}
+&\text{Var}(X_i) = E[X_i^2] - E[X_i]^2\\
+\implies &\sigma^2 = E[X_i^2] - \mu^2\\
+\implies &E[X_i^2] = \sigma^2 + \mu^2
+\end{align*}
+
+Then the variance is given by,
+\begin{align*}
+\text{Var}S(t) &= ES(t)^2 -(ES(t))^2\\
+&= E \left[\left(S_0 \prod_{i = 1}^{N(t)} X_i \right)^2 \right] - (S_0 \cdot \mu^{N(t)})^2\\
+&= E\left[S_0^2 \prod_{i = 1}^{N(t)} X_i^2 \right] - S_0^2 \cdot \mu^{2 \cdot N(t)}\\
+&= S_0^2 \prod_{i = 1}^{N(t)} E \left[X_i^2 \right]  - S_0^2 \cdot \mu^{2 \cdot N(t)}\\
+&= S_0^2 \prod_{i = 1}^{N(t)} \left[\sigma^2 + \mu^2 \right]  - S_0^2 \cdot \mu^{2 \cdot N(t)}\\
+&= S_0^2 \left[ (\sigma^2 + \mu^2)^{N(t)} - \mu^{2 \cdot N(t)}\right]
+\end{align*}
+
+\newpage
 \begin{problem}{4}
 Durrett, Exercise 2.58
 \end{problem}
+
+We have that the sum of independent exponential random variables is a gamma distribution. Hence,
+\begin{align*}
+T = t_1 + \cdots + t_N \sim \text{gamma}(N, \lambda)
+\end{align*}
+
+Notice that $N$ is a random variable. We can circumvent this by conditioning on $N = n$, which yields,
+\begin{align*}
+T = t_1 + \cdots + t_n \sim \text{gamma}(n, \lambda)
+\end{align*}
+
+Now note that if we let $A =$ ``$T = t$'' and $B =$ ``$N = n$'', we get,
+\begin{align*}
+P(A \ | \ B) \cdot P(B) = P(A \cap B)
+\end{align*}
+
+We already know that $P(A \ | \ B) = \text{gamma}(n, \lambda)$, and from the problem we know that $P(N = n) = (1 - p)^{n-1}$. Hence, we have that $P(B) = (1 - p)^{n-1}$ and so,
+\begin{align*} 
+P(A \cap B) &= \text{gamma}(n, \lambda) \cdot (1 - p)^{n-1}\\
+&= \lambda e^{-\lambda t} \cdot \frac{(\lambda \cdot t)^{n-1}}{(n-1)!} \cdot (1 - p)^{n-1}
+\end{align*}
 
 
 \end{document}

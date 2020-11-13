@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.19)  13 NOV 2020 03:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.19)  13 NOV 2020 14:51
 entering extended mode
 **./homework_9.tex
 (homework_9.tex
@@ -459,30 +459,33 @@ LaTeX Font Info:    External font `lmex10' loaded for size
  [1
 
 {C:/Users/chris/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(homework_9.aux) ) 
+[2] [3] (homework_9.aux) ) 
 Here is how much of TeX's memory you used:
- 4179 strings out of 492895
- 62235 string characters out of 3123735
+ 4183 strings out of 492895
+ 62273 string characters out of 3123735
  135191 words of memory out of 3000000
- 7988 multiletter control sequences out of 15000+200000
- 42012 words of font info for 57 fonts, out of 3000000 for 9000
+ 7990 multiletter control sequences out of 15000+200000
+ 47992 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,32p,420b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/d
-vips/lm/lm-rm.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/d
-vips/lm/lm-mathsy.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fonts/e
-nc/dvips/lm/lm-mathit.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/enc/dvips/lm/lm-ec.enc}<C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/lm/lmbx12.pfb><C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/public/lm/lmmi12.pfb><C:/Users/chris/AppData/Local/Programs/MiKTeX
- 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/chris/AppData/Local/Programs/MiK
-TeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/chris/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/chris/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/chris/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on homework_9.pdf (1 page, 113033 bytes).
+ 41i,10n,32p,527b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/enc/dvips/lm/lm-mathit.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX 2.9
+/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/chris/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/chris/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Users/chris/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Users/chris/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Users/chris/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/chris/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/chris/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/chris/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/chris/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/chris/Ap
+pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/chri
+s/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
+Output written on homework_9.pdf (3 pages, 136326 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
+ 55 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
