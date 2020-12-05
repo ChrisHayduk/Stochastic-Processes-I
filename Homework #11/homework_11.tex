@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes: Homework 11}
+
+\author{Chris Hayduk}
+\date{December 4, 2020}
+
+\maketitle
+
+\begin{problem}{1}
+Durrett, Exercise 3.4
+\end{problem}
+
+Let $g_i$ be the random fair from distribution $G$ paid at time $i$. Then we have that $W(t) = \sum_{i = 1}^{N(t)} g_i$. So
+\begin{align*}
+E W(t) &= E\left[\sum_{i = 1}^{N(t)} g_i\right]\\
+&= \sum_{i = 1}^{N(t)} E g_i\\
+&= \sum_{i = 1}^{N(t)} \mu_G\\
+&= N(t) \cdot \mu_G
+\end{align*}
+
+So we get,
+\begin{align*}
+\lim_{t \to \infty} EW(t)/t &= \mu_G \lim_{t \to \infty} N(t)/t
+\end{align*}
+
+Then, using Theorem 3.1, we get,
+\begin{align*}
+\mu_G \lim_{t \to \infty} N(t)/t &= \mu_G \cdot 1/\mu_F\\
+&= \frac{\mu_G}{\mu_F}
+\end{align*}
+
+\begin{problem}{2}
+Durrett, Exercise 3.11
+\end{problem}
+
+\begin{enumerate}[label=\alph*)]
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
+
+\begin{problem}{3}
+Durrett, Exercise 3.17
+\end{problem}
+
+Let $w_i$ denote the time that the $i$-th person waits until the start of the tour (in minutes). Note that we need $k$ people to start the tour, that each tour costs \$20, and that it costs \$0.10 per minute that each person waits. Hence, we have that the cost per person can be formulated as,
+\begin{align*}
+f(k) = \frac{0.1 \cdot (w_1 + w_2 + \cdots + w_k) + 20}{k}
+\end{align*}
+
+To find the average, let us take the expectation:,
+\begin{align*}
+E \left[\frac{0.1 \cdot (w_1 + w_2 + \cdots + w_k) + 20}{k}\right] &= \frac{0.1 \cdot (Ew_1 + Ew_2 + \cdots + Ew_k) + 20}{k}
+\end{align*}
+
+Since people arrive at a rate of 1 per minute, we get the following expected waiting times,
+\begin{align*}
+Ew_i = k - i
+\end{align*}
+
+This yields,
+\begin{align*}
+\frac{0.1 \cdot (Ew_1 + Ew_2 + \cdots + Ew_k) + 20}{k} &= \frac{0.1 \cdot 1/2 \cdot (k-1)k + 20}{k}\\
+&= \frac{0.05 \cdot (k-1)k + 20}{k}\\
+&= \frac{0.05k^2 - 0.05k + 20}{k}
+\end{align*}
+
+Now we want to minimize this equation. Let us take the derivative with respect to $k$ and set it to $0$, yielding,
+\begin{align*}
+0 = 0.05 - \frac{20}{k^2}
+\end{align*}
+
+This gives $k = 20$ or $k = -20$. We can't have a negative number of people, so our only valid critical point is $k = 20$. We can now use the second derivative test to ensure that this is a local minimum:
+
+\begin{align*}
+\frac{d}{dk} 0.05 - \frac{20}{k^2} = \frac{40}{k^3}
+\end{align*} 
+
+So $f''(20) = 40/20^3 > 0$, so $20$ is a local minimum as required.
+
+\begin{problem}{4}
+\end{problem}
+
+\begin{enumerate}[label=\Alph*)]
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
+
+
+
+\end{document}

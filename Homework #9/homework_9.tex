@@ -103,11 +103,11 @@ ES(t) &= E \left[ S_0 \prod_{i = 1}^{N(t)} X_i \right]\\
 &= S_0 E \left [ \prod_{i = 1}^{N(t)} X_i \right]
 \end{align*}
 
-By the independence of the $X_i$ variables, we get,
+By the independence of the $X_i$ variables and law of total expectation, we get,
 \begin{align*}
-ES(t) &= S_0 \prod_{i = 1}^{N(t)} EX_i\\
-&= S_0 \prod_{i=1}^{N(t)} \mu\\
-&= S_0 \cdot \mu^{N(t)}
+ES(t) &= S_0 \prod_{i = 1}^{\lambda t} EX_i\\
+&= S_0 \prod_{i=1}^{\lambda t} \mu\\
+&= S_0 \cdot \mu^{\lambda t}
 \end{align*}
 
 Now note that since $\text{Var}(X_i) = \sigma^2$ for each $i$, we have,
@@ -120,11 +120,11 @@ Now note that since $\text{Var}(X_i) = \sigma^2$ for each $i$, we have,
 Then the variance is given by,
 \begin{align*}
 \text{Var}S(t) &= ES(t)^2 -(ES(t))^2\\
-&= E \left[\left(S_0 \prod_{i = 1}^{N(t)} X_i \right)^2 \right] - (S_0 \cdot \mu^{N(t)})^2\\
-&= E\left[S_0^2 \prod_{i = 1}^{N(t)} X_i^2 \right] - S_0^2 \cdot \mu^{2 \cdot N(t)}\\
-&= S_0^2 \prod_{i = 1}^{N(t)} E \left[X_i^2 \right]  - S_0^2 \cdot \mu^{2 \cdot N(t)}\\
-&= S_0^2 \prod_{i = 1}^{N(t)} \left[\sigma^2 + \mu^2 \right]  - S_0^2 \cdot \mu^{2 \cdot N(t)}\\
-&= S_0^2 \left[ (\sigma^2 + \mu^2)^{N(t)} - \mu^{2 \cdot N(t)}\right]
+&= E \left[\left(S_0 \prod_{i = 1}^{N(t)} X_i \right)^2 \right] - (S_0 \cdot \mu^{\lambda t})^2\\
+&= E\left[S_0^2 \prod_{i = 1}^{N(t)} X_i^2 \right] - S_0^2 \cdot \mu^{2\lambda t}\\
+&= S_0^2 \prod_{i = 1}^{\lambda t} E \left[X_i^2 \right]  - S_0^2 \cdot \mu^{2\lambda t}\\
+&= S_0^2 \prod_{i = 1}^{\lambda t} \left[\sigma^2 + \mu^2 \right]  - S_0^2 \cdot \mu^{2\lambda t}\\
+&= S_0^2 \left[ (\sigma^2 + \mu^2)^{\lambda t} - \mu^{2\lambda t}\right]
 \end{align*}
 
 \newpage
