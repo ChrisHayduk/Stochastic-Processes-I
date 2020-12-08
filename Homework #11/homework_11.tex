@@ -124,10 +124,10 @@ Now we want to minimize this equation. Let us take the derivative with respect t
 This gives $k = 20$ or $k = -20$. We can't have a negative number of people, so our only valid critical point is $k = 20$. We can now use the second derivative test to ensure that this is a local minimum:
 
 \begin{align*}
-\frac{d}{dk} 0.05 - \frac{20}{k^2} = \frac{40}{k^3}
+\frac{d}{dk} \left[0.05 - \frac{20}{k^2}\right] = \frac{40}{k^3}
 \end{align*} 
 
-So $f''(20) = 40/20^3 > 0$, so $20$ is a local minimum as required.
+So $f''(20) = 40/20^3 > 0$, and thus $20$ is a local minimum as required.
 
 \begin{problem}{4}
 \end{problem}
@@ -136,7 +136,10 @@ So $f''(20) = 40/20^3 > 0$, so $20$ is a local minimum as required.
 
 \item
 
-\item
+\item Fix $x, n$. Then we need to show that,
+\begin{align*}
+\int_{-\infty}^x F_n(x - y)g(y) \leq F_n(x)
+\end{align*}
 
 \item
 
