@@ -1,0 +1,697 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{fixltx2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathrsfs}
+\usepackage{kbordermatrix}
+
+\usepackage{graphicx}
+
+\renewcommand{\kbldelim}{(}% Left delimiter
+\renewcommand{\kbrdelim}{)}% Right delimiter
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\textfrac}[2]{\dfrac{\text{#1}}{\text{#2}}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\DeclareMathOperator*{\E}{\mathbb{E}}
+
+
+\begin{document}
+
+\title{Stochastic Processes I: Course Outline}
+
+\author{Chris Hayduk}
+\date{\today}
+
+\maketitle
+
+\section{Markov Chains}
+
+\subsection{Definitions and Examples}
+
+We say that $X_n$ is a discrete time \textbf{Markov chain} with \textbf{transition matrix} $p(i, j)$ if for any $j, i, i_{n-1}, \ldots, i_0$
+\begin{align*}
+P(X_{n+1} = j \ | \ X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = p(i, j)
+\end{align*}
+
+We have restricted our attention to the \textbf{temporally homogeneous} case in which the \textbf{transition probability}
+\begin{align*}
+p(i, j) = P(X_{n+1} = j \ | \ X_n = i)
+\end{align*}
+
+does not depend on the time $n$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Multistep Transition Probabilities}
+
+\textbf{Theorem 1.1.} The $m$ step transition probability $P(X_{n+m} = j \ | \ X_n = i)$ is the $m$th power of the transition matrix $p$ (i.e. $p^m(i, j)$).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Classification of States}
+
+We begin with some important notation. We are often interested in the behavior of the chain for a fixed initial state, so we will introduce the shorthand $$P_x(A) = P(A \ | \ X_0 = x)$$
+
+Later we will have to consider expected values for this probability and we will denote them by $\E_x$.\\
+
+Let $T_y = \min \{n \geq 1: X_n = y\}$ be the \textbf{time of the first return to} $y$ (i.e. being there at time $0$ doesn't count), and let $$\rho_{yy} = P_y(T_y < \infty)$$ be the probability $X_n$ returns to $y$ when it starts at $y$.\\
+
+We say that $T$ is a \textbf{stopping time} if the occurrence (or nonoccurrence) of the event ``we stop at time $n$,'' $\{T = n\}$, can be determined by looking at the values of the process up to that time: $X_0, \ldots, X_n$. To see that $T_y$ is a stopping time, note that $$\{T_y = n\} = \{X_1 \neq y, \ldots, X_{n-1} \neq y, X_n = y\}$$ and that the right-hand side can be determined from $X_0, \ldots, X_n$.\\
+
+Since stopping at time $n$ depends only on the values $X_0, \ldots, X_n$, and in a Markov chain the distribution of the future only depends on the past through the current state, it should not be hard to believe that the Markov property holds at stopping times. This fact can be stated formally as\\
+
+\textbf{Theorem 1.2 (Strong Markov Property).} Suppose $T$ is a stopping time. Given that $T = n$ and $X_T = y$, any other information about $X_0, \ldots, X_T$ is irrelevant for predicting the future, and $X_{T+k}, k \geq 0$ behaves like the Markov chain with initial state $y$.\\
+
+Let $T^1_y = T_y$ and for $k \geq 2$ let $$T^k_y = \min \{n > T^{k-1}_y : X_n = y\}$$ be the \textbf{time of $k$th return to} $y$. The strong Markov property implies that the conditional probability we will return one more time given that we have returned $k-1$ times is $\rho_{yy}$. This and induction imply that $$P_y(T^k_y < \infty) = \rho^k_{yy}$$
+
+At this point, there are two possibilities:
+\begin{enumerate}
+\item $\rho_{yy} < 1$: The probability of return $k$ times is $\rho^k_{yy} \to 0$ as $k \to \infty$. Thus, eventually the Markov chain does not find its way back to $y$. In this case the state $y$ is called \textbf{transient}, since after some point it is never visited by the Markov chain
+
+\item $\rho_{yy} = 1$: The probability of returning $k$ times $\rho_{yy}^k = 1$, so the chain returns to $y$ infinitely many times. In this case, the state $y$ is called \textbf{recurrent}, it continually recurs in the Markov chain.
+\end{enumerate}
+
+\textbf{Lemma 1.3.} Suppose $P_x(T_y \leq k) \geq \alpha > 0$ for all $x$ in the state space $S$. Then $$P_x(T_y > nk) \leq (1 - \alpha)^n$$\\
+
+\textbf{Definition 1.1.} We say that $x$ \textbf{communicates with} $y$ and write $x \to y$ if there is a positive probability of reaching $y$ starting from $x$, that is, the probability $$\rho_{xy} = P_x(T_y < \infty) > 0$$
+
+\textbf{Lemma 1.4.} If $x \to y$ and $y \to z$, then $x \to z$.\\
+
+\textbf{Theorem 1.5.} If $\rho_{xy} > 0$ but $\rho_{yx} < 1$, then $x$ is transient.\\
+
+\textbf{Lemma 1.6.} If $x$ is recurrent and $\rho_{xy} > 0$, then $\rho_{yx} = 1$.\\
+
+A set $A$ is \textbf{closed} if it is impossible to get out, i.e., if $i \in A$ and $j \not\in A$ then $p(i, j) = 0$. A set $B$ is called \textbf{irreducible} if whenever $i, j \in B$, $i$ communicates with $j$.\\
+
+\textbf{Theorem 1.7.} If $C$ is a finite, closed, and irreducible set, then all states in $C$ are recurrent.\\
+
+\textbf{Theorem 1.8.} If the state space $S$ is finite, then $S$ can be written as a disjoint union $T \cup R_1 \cup \cdots \cup R_k$, where $T$ is a set of transient states and $R_i$, $1 \leq i \leq k$ are closed irreducible sets of recurrent states.\\
+
+\textbf{Lemma 1.9.} If $x$ is recurrent and $x \to y$, then $y$ is recurrent.\\
+
+\textbf{Lemma 1.10.} In a finite closed set there has to be at least one recurrent state.\\
+
+Let $N(y)$ be the number of visits to $y$ at $n \geq 1$. Then we can compute $\E N(y)$:\\
+
+\textbf{Lemma 1.11.} $\E_xN(y) = \rho_{xy}/(1 - \rho_{yy})$\\
+
+\textbf{Lemma 1.12.} $\E_xN(y) = \sum_{n=1}^{\infty} p^n(x, y)$\\
+
+\textbf{Theorem 1.13.} $y$ is recurrent if and only if $$\sum_{n=1}^{\infty} p^n(y, y) = \E_y N(y) = \infty$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Stationary Distributions}
+
+If $qp = q$, then $q$ is called a \textbf{stationary distribution}, If the distribution at time $0$ is the same as the distribution at time $1$, then by the Markov property it will be the same distribution at all times $n \geq 1$.\\
+
+Stationary distributions have a special importance in the theory of Markov chains, so we will use a special letter $\pi$ to denote solutions of the equation $$\pi p = \pi$$
+
+%%%%%%%%%%%%%
+
+\subsubsection{Doubly Stochastic Chains}
+
+\textbf{Definition 1.2.} A transition matrix $p$ is said to be \textbf{doubly stochastic} if its columns um to $1$, or in symbols, $\sum_x p(x,y) = 1$.\\
+
+\textbf{Theorem 1.14.} If $p$ is a doubly stochastic transition probability for a Markov chain with $N$ states, then the uniform distribution, $\pi(x) = 1/N$ for all $x$, is a stationary distribution.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Detailed Balance Condition}
+
+$\pi$ is said to satisfy the \textbf{detailed balance condition} if $$\pi(x) p(x, y) = \pi(y) p(y, x)$$
+
+This a stronger condition than $\pi p = \pi$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Limit Behavior}
+
+The \textbf{period} of a state is the largest number that will divide all the $n \geq 1$ for which $p^n(x, x) > 0$. That is, it is the greatest common divisor of $I_x = \{n \geq 1: p^n(x, x) > 0\}$.\\
+
+\textbf{Lemma 1.17.} If $\rho_{xy} > 0$ and $\rho_{yx} > 0$, then $x$ and $y$ have the same period.\\
+
+\textbf{Lemma 1.18.} If $p(x, x) > 0$, then $x$ has period $1$.\\
+
+We now come to the main results of the chapter. We first list the assumptions. All of these results hold when $S$ is finite or infinite.
+\begin{itemize}
+\item $I$: $p$ is irreducible
+\item $A$: aperiodic, all states have period $1$
+\item $R$: all states are recurrent
+\item $S$: there is a stationary distribution $\pi$
+\end{itemize}
+
+\textbf{Theorem 1.19 (Convergence Theorem).} Suppose $I, A, S$. Then as $n \to \infty$, $p^n(x, y) \to \pi(y)$\\
+
+\textbf{Theorem 1.20 (Asymptotic Frequency).} Suppose $I$ and $R$. If $N_n(y)$ is the number of visits to $y$ up to time $n$, then $$\frac{N_n(y)}{n} \to \frac{1}{\E_y T_y}$$
+
+\textbf{Theorem 1.21.} If $I$ and $S$ hold, then $$\pi(y) = 1/\E_y T_y$$ and hence the stationary distribution is unique.\\
+
+\textbf{Theorem 1.22.} Suppose $I$, $S$, and $\sum_x |f(x)|\pi(x) < \infty$. Then, $$\frac{1}{n} \sum_{m=1}^nf(X_m) \to \sum_x f(x) \pi(x)$$
+
+\textbf{Theorem 1.23.} Suppose $I, S$.
+\begin{align*}
+\frac{1}{n} \sum_{m=1}^n p^m(x, y) \to \pi(y)
+\end{align*}
+
+Thus while the sequence $p^m(x,y)$ will not converge in the periodic case, the average of the first $n$ values will.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Returns to a Fixed State}
+
+\textbf{Theorem 1.20.} Suppose $p$ is irreducible and recurrent. Let $N_n(y)$ be the number of visits to $y$ at times $\leq n$. As $n \to \infty$,
+\begin{align*}
+\frac{N_n(y)}{n} \to \frac{1}{\E_y T_y}
+\end{align*}
+
+\textbf{Theorem 1.21.} If $p$ is irreducible and has stationary distribution $\pi$, then $$\pi(y) = 1/\E_y T_y$$.
+
+\textbf{Theorem 1.24.} Suppose $p$ is irreducible and recurrent. Let $x \in S$ and let $T_x = \inf \{n \geq 1: X_n = x\}$.
+\begin{align*}
+\mu_x(y) = \sum_{n=0}^{\infty} P_x(X_n = y, T_x > n)
+\end{align*}
+
+defines a stationary measure with $0 < \mu_x(y) < \infty$ for all $y$.\\
+
+\textbf{Theorem 1.22.} Suppose $p$ is irreducible and has stationary distribution $\pi$, and $\sum_x |f(x)| \pi(x) < \infty$ then
+\begin{align*}
+\frac{1}{n} \sum_{m=1}^n f(X_m) \to \sum_x f(x) \pi(x)
+\end{align*}
+
+The key idea here is that by breaking the path at the return times to $x$ we get a sequence of random variables to which we can apply the law of large numbers.
+\stepcounter{subsection}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Exit Distributions}
+
+\textbf{Theorem 1.28.} Consider a Markov chain with state space $S$. Let $A$ and $B$ be subsets of $S$, so that $C = S - (A \cup B)$ is finite. Suppose $h(a) = 1$ for $a \in A$, $h(b) = 0$ for $b \in B$ and that for $x \in C$, we have
+\begin{align*}
+h(x) = \sum_y p(x,y)h(y)
+\end{align*}
+
+If $P_x(V_A \wedge V_B < \infty) > 0$ for all $x \in C$, then $h(x) = P_x(V_a < V_b)$. Note that for a set $F$, $V_F = \min\{n \geq 0: X_n \in F\}$ and for a point $x$, $V_x = \min\{n \geq 0: X_n = x\}$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Exit Times}
+
+\textbf{Theorem 1.29.} Let $V_A = \inf\{n \geq 0: X_n \in A\}$. Suppose $C = S - A$ is finite and that $P_x(V_A < \infty) > 0$ for any $x \in C$. If $g(a) = 0$ for all $a \in A$, and for $x \in C$ we  have $$g(x) = 1 + \sum_y p(x, y)g(y)$$ Then $g(x) = \E_x(V_A)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Infinite State Spaces}
+
+In this section we consider chains with an infinite state space. The major new complication is that recurrence is not enough to guarantee the existence of a stationary distribution.\\
+
+Note: $x$ is said to be \textbf{positive recurrent} if $\E_xT_x < \infty$. If a state is recurrent but not positive recurrent, i.e., $P_x(T_x < \infty) = 1$ but $\E_xT_x = \infty$, then we say that $x$ is \textbf{null recurrent}.\\
+
+\textbf{Theorem 1.30.} For an irreducible chain the following are equivalent:
+\begin{enumerate}
+\item Some state is positive recurrent.
+\item There is a stationary distribution $\pi$
+\item All states are positive recurrent
+\end{enumerate} 
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Poisson Processes}
+
+\subsection{Exponential Distribution}
+
+A random variable $T$ is said to have \textbf{an exponential distribution with rate $\lambda$}, or $T = \text{exponential}(\lambda)$ if $$P(T \leq t) = 1 - e^{-\lambda t} \text{  for all } t \geq 0$$
+
+Here we have described the distribution b giving the \textbf{distribution function} $F(t) = P(T \leq t)$. We can also write the definition in terms of the \textbf{density function} $f_T(t)$ which is the derivative of the distribution function.
+\begin{align*}
+f_T(t) = \begin{cases} 
+      \lambda e^{-\lambda t} & t \geq 0 \\
+      0 & t < 0
+   \end{cases}
+\end{align*}
+
+We have $\E T = 1/\lambda$ and $\text{var}(T) = 1/\lambda^2$\\
+
+\textbf{Lack of Memory Property} It is traditional to formulate this property in terms of waiting for an unreliable bus driver. In words ``if we've been waiting for $t$ units of time then the probability we must wait $s$ more units of time is the same as if we haven't waited at all.'' In symbols $$P(T > t + s \ | \ T > t) = P(T > s)$$
+
+\textbf{Theorem 2.1.} Let $V = \min(T_1, \ldots, T_n)$ and $I$ be the (random) index of the $T_i$ that is smallest.
+\begin{align*}
+P(V > t) &= \exp(-(\lambda_1 + \cdots + \lambda_n)t)\\
+P(I = i) &= \frac{\lambda_i}{\lambda_1 + \cdots + \lambda_n}
+\end{align*}
+
+$I$ and $V = \min\{T_1, ldots, T_n\}$ are independent.\\
+
+\textbf{Theorem 2.2.} Let $\tau_1, \tau_2, \ldots$ be independent exponential$(\lambda)$. The sum $T_n = \tau_1 + \cdots + \tau_n$ has a gamma$(n, \lambda)$ distribution. That is, the density function of $T_n$ is given by $$f_{T_n}(t) = \lambda e^{-\lambda t} \cdot \frac{(\lambda t)^{n-1}}{(n-1)!} \text{  for } t \geq 0$$ and $0$ otherwise.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Defining the Poisson Process}
+
+\textbf{Definition.} We say that $X$ has a \textbf{Poisson distribution} with mean $\lambda$, or $X = \text{Poisson}(\lambda)$, for short, if $$P(X = n) = e^{-\lambda}\frac{\lambda^n}{n!} \text{  for } n = 0, 1, 2, \ldots$$
+
+\newpage
+\textbf{Theorem 2.3.} For any $k \geq 1$,
+\begin{align*}
+\E X(X-1)\cdots(X-k+1) = \lambda^k
+\end{align*}
+
+and hence $\text{var}(X) = \lambda$.\\
+
+\textbf{Theorem 2.4.} If $X_i$ are independent Poisson$(\lambda_i)$, then $$X_1 + \cdots + X_k = \text{Poisson}(\lambda_1 + \cdots \lambda_n)$$
+
+Let $N(s)$ be the number of arrivals in $[0, s]$\\
+
+\textbf{Definition.} $\{N(s), s \geq 0\}$ is a Poisson process if
+\begin{enumerate}
+\item $N(0) = 0$
+\item $N(t+s) - N(s) = \text{Poisson}(\lambda t)$, and
+\item $N(t)$ has \textbf{independent increments}, i.e., if $t_0 < t_1 < \cdots < t_n$, then
+\begin{align*}
+N(t_1) - N(t_0), \ldots, N(t_n) - N(t_{n-1}) \text{  are independent}
+\end{align*}
+\end{enumerate}
+
+\textbf{Theorem 2.5.} If $n$ is large, the binomial$(n, \lambda/n)$ distribution is approximately Poisson$(\lambda)$.
+
+\subsubsection{Constructing the Poisson Process}
+
+\textbf{Definition.} Let $\tau_1, \tau_2, \ldots$ be independent exponential$(\lambda)$ random variables. Let $T_n = \tau_1 + \cdots + \tau_n$ for $n \geq 1$, $T_0 = 0$ and define $N(s) = \max\{n: T_n \leq s\}$.\\
+
+We think of the $\tau_n$ as times between arrivals of customers at the ATM, so $T_n = \tau_1 + \cdots + \tau_n$ is the arrival time of the $n$th customer and $N(s)$ is the number of arrivals by time $s$.\\
+
+\textbf{Lemma 2.6.} $N(s)$ has a Poisson distribution with mean $\lambda s$.\\
+
+\textbf{Lemma 2.7.} $N(t+s) - N(s), t \geq 0$ is a rate $\lambda$ Poisson process and independent of $N(r), 0 \leq r \leq s$\\
+
+\textbf{Lemma 2.8.} $N(t)$ has independent increments.
+
+\subsubsection{More Realistic Models}
+
+\textbf{Theorem 2.9.} Let $X_{n,m}, 1 \leq m \leq n$ be independent random variables with $P(X_m = 1) = p_m$ and $P(X_m = 0) = 1 - p_m$. Let 
+\begin{align*}
+S_n = X_1 + \cdots + X_n, \ \lambda_n = \E S_n = p_1 + \cdots p_n
+\end{align*}
+
+and $Z_n = \text{Poisson}(\lambda_n)$. Then for any set $A$,
+\begin{align*}
+|P(S_n \in A) - P(Z_n \in A)| \leq \sum_{m=1}^n p^2_m
+\end{align*}
+
+\textbf{Nonhomogenous Poisson Processes} We say that $\{N(s), s \geq 0\}$ is a Poisson process with rate $\lambda(r)$ if 
+\begin{enumerate}
+\item $N(0) = 0$
+\item $N(t)$ has independent increments 
+\item $N(t) - N(s)$ is Poisson with mean $\int_s^t \lambda(r) dr$
+\end{enumerate}
+
+In this case, the interarrival times are not exponential and they are not independent.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Compound Poisson Process}
+
+In this section we will embellish our Poisson process by associating an independent and identically distributed (i.i.d) random variable $Y_i$ with each arrival. By independent, we mean that the $Y_i$ are independent of each other and of the Poisson process of arrivals.\\
+
+\textbf{Theorem 2.10.} Let $Y_1, Y_2, \cdots$ be independent and identically distributed, let $N$ be an independent nonnegative integer valued random variable, and let $S = Y_1 + \cdots + Y_N$ with $S = 0$ when $N = 0$.
+\begin{enumerate}
+\item If $\E | Y_i |, \E N < \infty$, then $\E S = \E N \cdot \E Y_i$
+\item If $\E Y_i^s, \E N^2 < \infty$, then $\text{var}(S) = \E N \text{var}(Y_i) + \text{var}(N)(\E Y_i)^2$
+\item If $N$ is Poisson$(\lambda)$, then $\text{var}(S) = \lambda \E Y_i^2$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Transformations}
+
+
+%%%%%%%%%%%%%
+
+\subsubsection{Thinning}
+
+In the previous section, we added up the $Y_i$'s associated with the arrivals in our Poisson process to see how many customers, etc., we had accumulated by time $t$. In this section, we will use the $Y_i$ to split the Poisson process into several. Let $N_j(t)$ be the number $i \leq N(t)$ with $Y_i = j$. In Example 2.3, where $Y_i$ is the number of people in the $i$th car, $N_j(t)$ will be the number of cars that have arrived by time $t$ with exactly $j$ people. The somewhat remarkable fact is\\
+
+\textbf{Theorem 2.11.} $N_j(t)$ are independent rate $\lambda P(Y_i = j)$ Poisson processes.\\
+
+\textbf{Why is this remarkable?} There are two ``surprises'' here: the resulting processes are Poisson and they are independent.\\
+
+\textbf{Theorem 2.12.} Suppose that in a Poisson process with rate $\lambda$, we keep a point that lands at $s$ with probability $p(s)$. Then the result is a nonhomogeneous Poisson process with rate $\lambda p(s)$.\\
+
+\textbf{Theorem 2.13.} In the long run the number of calls in the system will be Poisson with mean
+\begin{align*}
+\lambda \int_{r=0}^{\infty} (1 - G(r)) dr = \lambda \mu
+\end{align*}
+
+%%%%%%%%%%%%%
+
+\subsubsection{Superposition}
+
+Taking one Poisson process and splitting it into two or more by using an i.i.d. sequence $Y_i$ is called \textbf{thinning}. Going in the other direction and adding up a lot of independent processes is called \textbf{superposition}. Since a Poisson process can be split into independent Poisson processes, it should not be too surprising that when the independent Poisson processes are put together, the sum is Poisson with a rate equal to the sum of the rate.\\
+
+\textbf{Theorem 2.14.} Suppose $N_1(t), \ldots, N_k(t)$ are independent Poisson processes with rates $\lambda_1, \ldots, \lambda_k$, then $N_1(t) + \cdots + N_k(t)$ is a Poisson process with rate $\lambda_1 + \cdots \lambda_k$.
+
+%%%%%%%%%%%%%
+
+\subsubsection{Conditioning}
+
+Let $T_1, T_2, T_3, \ldots$ be the arrival times of a Poisson process with rate $\lambda$, let $U_1, U_2, \ldots, U_n$ be independent and uniformly distributed on $[0, t]$ and let $V_1 < \cdots < V_n$ be the $U_i$ rearranged into increasing order. This section is devoted to the proof of the following remarkable fact.\\
+
+\textbf{Theorem 2.15.} If we condition on $N(t) = n$< then the vector $(T_1, T_2, \ldots T_n)$ has the same distribution as $(V_1, V_2, \ldots, V_n)$ and hence the set of arrival times $\{T_1, T_2, \ldots, T_n\}$ has the same distribution as $\{U_1, U_2, \ldots, U_n\}$\\
+
+\textbf{Theorem 2.16.} If $s < t$ and $0 \leq m \leq n$, then
+\begin{align*}
+P(N(s) = m \ | \ N(t) = n) = {n \choose m} \left( \frac{s}{t} \right)^m \left(1 - \frac{s}{t} \right)^{n-m}
+\end{align*}
+
+That is, the conditional distribution of $N(s)$ given $N(t) = n$ is binomial$(n, s/t)$
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Renewal Processes}
+
+\subsection{Law of Large Numbers}
+
+\textbf{Theorem 3.1.} Let $\mu = \E t_i$ be mean interarrival time. If $P(t_i > 0) > 0$, then with probability one,
+\begin{align*}
+N(t)/t \to 1/\mu \text{  as } t \to \infty
+\end{align*}
+
+In words, if our light bulb lasts $\mu$ years on the average then in $t$ years we will use up about $t/\mu$ light bulbs. Since the interarrival times in a Poisson process are exponential with mean $1/\lambda$, Theorem 3.1 implies that if $N(t)$ is the number of arrivals up to time $t$ in a Poisson process, then
+\begin{align*}
+N(t)/t \to \lambda \text{ as } t \to \infty
+\end{align*}
+
+\textbf{Theorem 3.2 (Strong Law of Large Numbers).} Let $x_1, x_2, x_3, \ldots$ be i.i.d. with $\E x_i = \mu$,, and let $S_n = x_1 + \cdots + x_n$. Then with probability one,
+\begin{align*}
+S_n/n \to \mu \text{ as } n \to \infty
+\end{align*}
+
+Now suppose at the time of the $i$th renewal we earn a reward $r_i$. Let
+\begin{align*}
+R(t) = \sum_{i=1}^{N(t)} r_i
+\end{align*}
+
+be the total amount of rewards earned by time $t$. The main result about renewal reward processes is the following strong law of large numbers:\\
+
+\textbf{Theorem 3.3.} With probability one,
+\begin{align*}
+\frac{R(t)}{t} \to \frac{\E r_i}{\E t_i}
+\end{align*}
+
+Now we can move onto an extension of the renewal reward process: \textbf{alternating renewal reward processes}.\\
+
+\textbf{Example 3.4 (Alternating Renewal Processes).} Let $s_1, s_2, \ldots$ be independent with a distribution $F$ that has mean $\mu_F$, and let $u_1, u_2, \ldots$ be independent with distribution $G$ that has mean $\mu_G$. For a concrete example consider the machine in Example 3.2 that works for amount of time $s_i$ before needing a repair that takes $u_i$ units of time. However, to talk about things in general we will say that the alternating renewal process spends an amount of time $s_i$ in state $1$, an amount of time $u_i$ in state $2$, and then repeats the cycle again.\\
+
+\textbf{Theorem 3.4.} In an alternating renewal process, the limiting fraction of time in state $1$ is
+\begin{align*}
+\frac{\mu_F}{\mu_F + \mu_G}
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Applications to Queuing Theory}
+
+In this section we will use the ideas of renewal theory to prove results for queuing systems with general service times. In the first part of this section we will consider general arrival times. In the second we will specialize to Poisson arrivals.
+
+%%%%%%%%%%%%%
+
+\subsubsection{GI/G/1 Queue}
+
+Here the $GI$ stands for general input. That is, we suppose that the times $t_i$ between successive arrivals are independent and have a distribution $F$ with mean $1/\lambda$. We make this somewhat unusual choice of notation for mean so that if $N(t)$ is the number of arrivals by time $t$, then Theorem 3.1 implies that the long-run arrival rate is
+\begin{align*}
+\lim_{t \to \infty} \frac{N(t)}{t} = \frac{1}{\E t_i} = \lambda
+\end{align*}
+
+The second $G$ stands for general service times. That is, we assume that the $i$th customer requires an amount of service $s_i$, where the $s_i$ are independent and have a distribution $G$ with mean $1/\mu$. Again, the notations for the mean is chosen so that the service rate is $\mu$. The final $1$ indicates there is one server. Our final result states that the queue is stable if the arrival rate is smaller than the long-run service rate.\\
+
+\textbf{Theorem 3.5.} Suppose $\lambda < \mu$. If the queue starts with some finite number $k \geq 1$ customers who need service, then it will empty out with probability one. Furthermore, the limiting fraction of time the server is busy is $\leq \lambda/\mu$.
+
+%%%%%%%%%%%%%
+
+\subsubsection{Cost Equations}
+
+Let $X_s$ be the number of customers in the system at time $s$. Let $L$ be the long-run average number of customers in the system:
+\begin{align*}
+L = \lim_{t \to \infty} \frac{1}{t} \int_0^t X_s ds
+\end{align*}
+
+Let $W$ be the long-run average amount of time a customer spends in the system:
+\begin{align*}
+W = \lim_{n \to \infty} \frac{1}{n} \sum_{m=1}^n W_m
+\end{align*}
+
+where $W_m$ is the amount of time the $m$th arriving customer spends in the system. Finally, let $\lambda_{a}$ be the long-run average rate at which arriving customers join the system, that is,
+\begin{align*}
+\lambda_a = \lim_{t \to \infty} N_a(t)/t
+\end{align*}
+
+where $N_a(t)$ is the number of customers who arrive before time $t$ and enter the system. Ignoring the problem of proving these limits, we can assert that these quantities are related by,\\
+
+\textbf{Theorem 3.6 (Little's Formula)} $L = \lambda_a W$\\
+
+%%%%%%%%%%%%%
+
+\subsubsection{M/G/1 Queue}
+
+Here the $M$ stands for Markovian input and indicates that we are considering the special case of the $GI/G/1$ queue in which the inputs are a rate $\lambda$ Poisson process. The rest of the setup is as before: there is one server and the $i$th customer requires an amount of service $s_i$, where the $s_i$ are independent and have a distribution $G$ with mean $1/\mu$.\\
+
+Let $X_n$ be the number of customers in the queue when the $n$h customer enters service. To be precise, when $X_0 = x$, the chain starts with $x$ people waiting in line and customer $)$ just beginning her service. To understand the definition, the following picture is useful:
+
+To begin to define our Markov chain $X_n$, let
+\begin{align*}
+a_k = \int_0^{\infty} e^{-\lambda t} \frac{(\lambda t)^k}{k!} dG(t)
+\end{align*}
+
+be the probability that $k$ customers arrive during a service time.
+
+\begin{align*}
+\sum_k ka_k = \int_0^{\infty} \lambda t dG(t) = \lambda \E s_i = \lambda/\mu
+\end{align*}
+
+To construct the chain now let $\xi_1, \xi_2, \ldots$ be i.i.d. with $P(\xi_i = k) = a_k$. We think of $\xi_i$ as the number of customers to arrive during the $i$th service time. If $X_n > 0$ then $$X_{n+1} = X_n + \xi_n - 1$$
+
+In words, $\xi_n$ customers are added to the queue and then it shrinks by one when the $n$th customer departs. If $X_n = 0$ and $\xi_n > 0$, then the same logic applies but if $X_n = 0$ and $\xi_n = 0$ then $X_{n+1} = 0$. To fix this we write $$X_{n+1} = (X_n + \xi_n - 1)^+$$
+
+where $z^+ = \max\{z, 0\}$ is the positive part.\\
+
+From this formula, we see that the transition probability is
+\begin{align*}
+\kbordermatrix{
+    & 0 & 1 & 2 & 3 & 4 & 5 & \cdots \\
+    0 & a_0 + a_1 & a_2 & a_3 & a_4 & a_5 & a_6 \\
+    1 & a_0 & a_1 & a_2 & a_3 & a_4 & a_5 \\
+    2 & 0 & a_0 & a_1 & a_2 & a_3 & a_4\\
+    3 & 0 & 0 & a_0 & a_1 & a_2 & a_3 \\
+    4 & 0 & 0 & 0 & a_0 & a_1 & a_2\\
+  }
+\end{align*}
+
+To explain the value of $p(0,0)$, we note that if $X_n = 0$ and $\xi_n = 0$ or $1$ then $X_{n+1} = 0$. In all other cases, if $X_{n+1} = X_n = \xi_n - 1$, so, for example, $p(2, 4) = P(\xi_n = 3)$.\\
+
+Our result for the $GI/G/I$ queue implies $1/\E_0T_0 = \pi(0) = 1 - \lambda/\mu$ so we have proved the first part of the following:\\
+
+\newpage
+\textbf{Theorem 3.7.} 
+\begin{enumerate}
+\item If $\lambda < \mu$, then $X_n$ is positive recurrent and $\E_0T_0 = \mu/(\mu - \lambda)$
+\item If $\lambda = \mu$, then $X_n$ is null recurrent
+\item If $\lambda > \mu$, then $X_n$ is transient
+\end{enumerate}
+
+\textbf{Busy Periods} We learned in Theorem 3.7 that if $\lambda < \mu$ then an $M/G/1$ queue will repeatedly return to an empty state. Thus the server experiences alternating busy periods with duration $B_n$ and idle periods with duration $I_n$. The lack of memory property implies that $I_n$ has an exponential distribution with rate $\lambda$. Combining this observation with our result for alternating renewal processes, we see that the limiting fraction of time the server is idle is
+\begin{align*}
+\frac{1/\lambda}{1/\lambda + \E B_n} = \pi(0)
+\end{align*}
+
+After some simplification, we have,
+\begin{align*}
+EB_n = \frac{1}{\mu - \lambda}
+\end{align*}
+
+\textbf{PASTA} These initials stand for ``Poisson arrivals see time averages.'' To be precise, if $\pi(n)$ is the limiting fraction of time that there are $n$ individuals in the queue and $\alpha_n$ is the limiting fraction of arriving customers that see a queue of size $n$, then\\
+
+\textbf{Theorem 3.8.} $\alpha_n = \pi(n)$\\
+
+\textbf{Theorem 3.9 (Pollaczek-Khintchine Formula).} The long run average waiting time in the queue:
+\begin{align*}
+W_Q = \frac{\lambda \E (s_i^2/2)}{1 - \lambda \E s_i}
+\end{align*}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Continuous Time Markov Chains}
+
+\subsection{Definitions and Examples}
+
+In continuous time, it is technically difficult to define the conditional probability given all of the $X_r$ for $r \leq s$, so we instead say that $X_t$,, $t \geq 0$ is a Markov chain if for any $0 \leq s_0 < s_1 < \cdots < s_n < s$ and possible states $i_0, \ldots, i_n, i, j$, we have,
+\begin{align*}
+P(X_{t+s} = j \ | \ X_s = i, X_{s_n} = i_n, \ldots, X_{s_0} = i_0) = P(X_t = j \  | \ X_0 = i)
+\end{align*}
+
+In words, given the present state, the rest of the past is irrelevant for predicting the future. Note that built into the definition is the fact that the probability of going from $i$ at time $s$ to $j$ at time $s+t$ only depends on $t$, the difference in times.\\
+
+In continuous time there is no first time $t > 0$, so we introduce for each $t > 0$ a \textbf{transition probability:}
+
+\begin{align*}
+p_t(i, j) = P(X_t = j \ | \ X_0 = j)
+\end{align*}
+
+In continuous time, as in discrete time, the transition probability satisfies,\\
+
+\textbf{Theorem 4.1 (Chapman-Kolmogorov Equation).} 
+\begin{align*}
+\sum_k p_s(i,k)p_t(k, j) = p_{s+t}(i, j)
+\end{align*}
+
+\textbf{Formal Construction.} Suppose, for simplicity, that $\lambda_i > 0$ for all $i$. Let $Y_n$ be a Markov chain with transition probability $r(i, j)$. The discrete time chain $Y_n$ gives the road map that the continuous time process will follow. To determine how long the process should stay in each state let $\tau_0, \tau_1, \tau_2, \ldots$ be independent exponentials with rate $1$.\\
+
+At time $0$, the process is in state $Y_0$ and should stay there for an amount of time that is expressed with rate $\lambda(Y_0)$, so we let the time the process stay in state $Y_0$ be $t_1 = \tau_0/\lambda(Y_0)$.\\
+
+At time $T_1 = t_1$ the process jumps to $Y_1$, where it should stay for an exponential amount of time with rate $\lambda(Y_1)$, so we let the time time process stays in state $Y_1$ be $t_2 = \tau_1/\lambda(Y_1)$.\\
+
+At time $T_2 = t_1 + t_2$ the process jumps to $Y_2$, where it should stay for an exponential amount of time with rate $\lambda(Y_2)$, so we let the time the process stays in state $Y_2$ be $t_3 = \tau_2/\lambda(Y_2)$.\\
+
+Continuing in the obvious way, we can let the amount of time the process stays in $Y_n$ be $t_{n+1} = \tau_n/\lambda(Y_n)$, so that the process jumps to $Y_{n+1}$ at time
+\begin{align*}
+T_{n+1} = t_1 + \cdots + t_{n+1}
+\end{align*}
+
+In symbols, if we let $T_0 = 0$, then for $n \geq 0$, we have
+\begin{align*}
+X(t) = Y_n \text{    for } T_n \leq t \leq T_{n+1}
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Computing the Transition Probability}
+
+In the last section we saw that given jump rates $q(i, j)$ we can construct a Markov chain that has these jump rates. This chain, of course, has a transition probability
+\begin{align*}
+p_t(i, j) = P(X_t = j \ | \ X_0 = i)
+\end{align*}
+
+Our next question is: How do you compute the transition probability $p_t$ from the jump rates $1$? By the following,
+\begin{align*}
+p'_t(i, j) = \sum_{k \neq i} q(i, k)p_t(k, j) - \lambda_ip_t(i,j)
+\end{align*}
+
+To simplify the last expression we introduce a new matrix:
+\begin{align*}
+Q(i, j) = \begin{cases} 
+      q(i,j) & j \neq i \\
+      -\lambda_i & j = i
+   \end{cases}
+\end{align*}
+
+For future computations note that the off-diagonal elements $q(i, j)$ with $i \neq j$ are nonnegative while the diagonal entry is a negative number chosen to make the row sum equal to $0$. Using matrix notation, we can rewrite the equation for $p'_t(i,j)$ as $$p'_t = Qp_t$$
+
+This is \textbf{Kolmogorov's backward equation}. If $Q$ were a number instead of a matrix, the last equation would be easy to solve. We would set $p_t = e^{Qt}$ and check by differentiating that the equation held. Inspired by this observation, we define the matrix
+\begin{align*}
+e^{Qt} - \sum_{n=0}^{\infty} \frac{(Qt)^n}{n!} = \sum_{n=0}^{\infty} Q^n \cdot \frac{t^n}{n!}
+\end{align*}
+
+\textbf{Kolmogorov's Forward Equation.} This time we split $[0, t+h]$ into $[0, t]$ and $[0, t+h]$ rather than into $[0, h]$ and $[h, t+h]$.
+\begin{align*}
+p_{t+h}(i,j) - p_t(i,j) &= \left( \sum_k p_t(i, k)p_h(k, j) \right) - p_t(i, j)\\
+&= \left( \sum_{k \neq j} p_t(i, k)p_h(k, j) \right) + [p_h(j, j) - 1]p_t(i,j)
+\end{align*}
+
+Computing as before we arrive at
+\begin{align*}
+p'_t(i, j) = \sum_{k \neq j} p_t(i, k)q(k, j) - p_t(i, j)\lambda_j
+\end{align*}
+
+Introducing matrix notation again, we can write
+\begin{align*}
+p'_t = p_tQ
+\end{align*}
+
+So we see that $Qp_t = p'_t = p_tQ$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Limiting Behavior}
+
+The Markov chain $X_t$ is irreducible if for any two states $i$ and $j$ it is possible to get from $i$ to $j$ in a finite number of steps. To be precise, there is a sequence of states $k_0 = i, k_1, \ldots, k_n = j$ so that $q(k_{m-1}, k_m) > 0$ for $1 \leq m \leq n$.\\
+
+\textbf{Lemma 4.6.} If $X_t$ is irreducible and $t > 0$, then $p_t(i, j) > 0$ for all $i, j$.\\
+
+\textbf{Lemma 4.7.} $\pi$ is a stationary distribution if and only if $\pi Q = 0$.\\
+
+\textbf{Why is this true?} Filling in the definition of $Q$ and rearranging, the condition $\pi Q = 0$ becomes
+\begin{align*}
+\sum_{k \neq j} \pi(k) q(k, j) = \pi(j) \lambda_j
+\end{align*}
+
+If we think of $\pi(k)$ as the amount of sand at $k$, the right-hand side represents the rate at which sand leaves $j$, while the left gives the rate at which sand arrives at $j$. Thus, $\pi$ will be a stationary distribution if for each $j$ the flow of sand into $j$ is equal to the flow out of $j$.\\
+
+Lemma 4.6 implies that for any $h > 0$, $p_h$ is irreducible and aperiodic, so by Theorem 1.19
+\begin{align*}
+\lim_{n \to infty} p_{nh}(i, j) = \pi(j)
+\end{align*}
+
+From this, it is intuitively clear that\\
+
+\textbf{Theorem 4.8.} If a continuous time Markov chain $X_t$ is irreducible and has a stationary distribution $\pi$, them
+\begin{align*}
+\lim_{t \to \infty} p_t(i, j) = \pi(j)
+\end{align*}
+
+%%%%%%%%%%%%%
+
+\subsubsection{Detailed Balance}
+
+Generalizing from discrete time we can formulate this condition as:
+
+\begin{align*}
+\pi(k)q(k, j) = \pi(j)q(j, k) \text{  for all } j \neq k
+\end{align*}
+
+The reason for interest in this concept is\\
+
+\textbf{Theorem 4.9.} If the above equation holds, then $\pi$ is a stationary distribution.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
